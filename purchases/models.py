@@ -9,4 +9,4 @@ class Purchase(models.Model):
     date_purchased = models.DateTimeField(auto_now_add=True, blank=True)
 
     def __str__(self):
-        return self.student.username + ' purchased ' + self.lesson_purchased.topic + ' on ' + date_purchased
+        return self.student.username + ' purchased ' + self.lesson_purchased.topic
