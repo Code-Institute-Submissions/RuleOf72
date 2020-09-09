@@ -11,27 +11,29 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+        ('lessons', '0001_initial'),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Lessons',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('date_created', models.DateTimeField(auto_now_add=True)),
-                ('topic', models.CharField(max_length=255)),
-                ('price', models.IntegerField(default=0)),
-                ('teacher', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
-            ],
-        ),
-        migrations.CreateModel(
-            name='Subtopics',
+            name='ForumTopic',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=255)),
-                ('vid', models.CharField(blank=True, max_length=255)),
                 ('content', models.TextField()),
-                ('lesson', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='lessons.Lessons')),
+                ('date_created', models.DateTimeField(auto_now_add=True)),
+                ('commenter', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('lesson_commented', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='lessons.Lessons')),
+            ],
+        ),
+        migrations.CreateModel(
+            name='ForumComments',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('date_created', models.DateTimeField(auto_now_add=True)),
+                ('content', models.TextField()),
+                ('commenter', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('topic_commented', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='forum.ForumTopic')),
             ],
         ),
     ]

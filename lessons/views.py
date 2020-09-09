@@ -1,23 +1,22 @@
 from django.shortcuts import render, HttpResponse, get_object_or_404
-
-from .forms import lessonsForm
-from .models import lessons
+from .forms import LessonsForm, SubtopicsForm
+from .models import Lessons, Subtopics
 
 # Create your views here.
 
 def create_lesson(request):
     if request.method == "POST":
-        form = lessonsForm(request.POST)
+        form = LessonsForm(request.POST)
         if form.is_valid():
             form.save()
             return HttpResponse("Lesson is added")
         else:
-            return render(request, 'lessons/create_lessons.template.html', {
+            return render(request, 'create_lessons.template.html', {
                 'form': form
             })
     else:
-        form = lessonsForm()
+        form = LessonsForm()
 
-        return render(request, 'lessons/create_lessons.template.html', {
+        return render(request, 'create_lessons.template.html', {
             'form': form
         })

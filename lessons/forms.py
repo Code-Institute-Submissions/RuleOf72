@@ -1,7 +1,13 @@
 from django import forms
-from .models import lessons, User
+from .models import Lessons, Subtopics
+from django.contrib.auth.models import User
 
-class lessonsForm(forms.ModelForm):
+class LessonsForm(forms.ModelForm):
     class Meta:
-        model = lessons
+        model = Lessons
+        fields = "__all__"
+
+class SubtopicsForm(forms.ModelForm):
+    class Meta:
+        model = Subtopics
         fields = "__all__"
