@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import Lessons, Subtopics
+from .models import Lesson, Sub_topic
 # Register your models here.
 
-admin.site.register(Lessons)
-admin.site.register(Subtopics)
+admin.site.register(Lesson)
+admin.site.register(Sub_topic)

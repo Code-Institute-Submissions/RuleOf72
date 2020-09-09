@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
-class Lessons(models.Model):
+class Lesson(models.Model):
     date_created = models.DateTimeField(auto_now_add=True, blank=True)
     topic = models.CharField(blank=False, max_length=255)
     price = models.IntegerField(blank=False, default=0)
@@ -13,11 +13,11 @@ class Lessons(models.Model):
     def __str__(self):
         return self.topic + ' by: ' + self.teacher.username
 
-class Subtopics(models.Model):
+class Sub_topic(models.Model):
     title = models.CharField(blank=False, max_length=255)
     vid = models.CharField(blank=True, max_length=255)
     content = models.TextField(blank=False)
-    lesson = models.ForeignKey(Lessons, on_delete=models.CASCADE)
+    lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title

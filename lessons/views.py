@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponse, get_object_or_404
 from .forms import LessonsForm, SubtopicsForm
-from .models import Lessons, Subtopics
+from .models import Lesson, Sub_topic
 
 # Create your views here.
 
