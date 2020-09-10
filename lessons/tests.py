@@ -1,33 +1,12 @@
 from django.test import TestCase
 from django.shortcuts import get_object_or_404
-
-from .models import lessons, User
-from .forms import lessonsForm
+from django.contrib.auth.models import User
+from .models import Lesson
 import django.db.utils
 # Create your tests here.
 
-class lessonsModelTestCase(TestCase):
-
-    def test_create_lesson_model(self):
-
-        u = User(first_name="Tan", last_name="Ah Kow",
-                username="ahkowtan", email="t@t.com",
-                date_joined=)
-        u.save()
-
-        l = lessons()
-        l.topic = "stocks"
-        l.price = 9.9
-        l.date_joined = 
-        l.user = u
-
-        l.save()
-
-        self.assertTrue(l.id > 0)
-        lesson = get_object_or_404(lessons, pk=l.id)
-        self.assertTrue(lesson is not None)
-
-        self.assertEqual(lesson.topic, "stocks")
-        self.assertEqual(lesson.price, 9.9)
-        self.assertEqual(lesson.date_joined, )
-        self.assertEqual(lesson.user, u)
+class CreateLessonViewTestCase(TestCase):
+    def test_can_get_animal_form(self):
+        response = self.client.get('/lessons/create/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'create_lessons.template.html')
