@@ -21,5 +21,4 @@ urlpatterns = [
     path('lessons/', include('lessons.urls')),
     path('', include('home.urls')),
     path('forum/', include('forum.urls')),
-    path('profiles/', include('profiles.urls')),
 ]
