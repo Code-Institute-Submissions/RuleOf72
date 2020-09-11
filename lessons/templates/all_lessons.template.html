@@ -1,0 +1,15 @@
+{% extends 'base.template.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<h1>Lessons</h1>
+    <ul>
+      {% for each_lesson in all_lessons %}
+      <li>
+      {{each_lesson.topic}}
+            <a href="{% url 'update_lesson_route' lesson_id=each_lesson.id %}">Edit</a> 
+      </li>
+      {% endfor %}
+    </ul>
+
+{%endblock%}
