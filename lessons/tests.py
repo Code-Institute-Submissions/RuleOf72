@@ -52,3 +52,12 @@ class LessonViewTestCase(TestCase):
         self.assertEquals(update_lesson.topic, "CFD2")
         self.assertEquals(update_lesson.price, 888)
         self.assertEquals(update_lesson.teacher, teacher2)
+
+    def test_can_get_delete_page(self):
+        teacher = User.objects.create_user(username='ZZZ')
+        teacher.save()
+        lesson = Lesson(topic='CFD', price=999, teacher=teacher)
+        lesson.save()
+        response = self.client.get(f'/lessons/delete/{lesson.id}/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'delete_lessons.template.html')
