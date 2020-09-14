@@ -61,3 +61,13 @@ class LessonViewTestCase(TestCase):
         response = self.client.get(f'/lessons/delete/{lesson.id}/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'delete_lessons.template.html')
+    
+    def test_can_delete_lesson(self):
+        teacher = User.objects.create_user(username='ZZZ')
+        teacher.save()
+        lesson = Lesson(topic='CFD', price=999, teacher=teacher)
+        lesson.save()
+        response = self.client.post(reverse('delete_lesson_route', kwargs={'lesson_id': str(lesson.id)}))
+        self.assertEqual(response.status_code, 302)
+        lesson = Lesson.objects.filter(topic="CFD")
+        self.assertEqual(lesson.count(), 0)
