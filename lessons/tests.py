@@ -21,6 +21,14 @@ class LessonViewTestCase(TestCase):
             "teacher": str(teacher.id),
         })
         self.assertEqual(response.status_code, 200)
-        print(response.content)
         lesson = Lesson.objects.filter(topic="bonds 101")
         self.assertEqual(lesson.count(), 1)
+
+    def test_can_get_update_lesson_form(self):
+        teacher = User.objects.create_user(username='EFG')
+        teacher.save()
+        lesson = Lesson(topic='CFD', price=999, teacher=teacher)
+        lesson.save()
+        response = self.client.get(f'/lessons/update/{lesson.id}/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'update_lessons.template.html')
