@@ -7,7 +7,8 @@
       {% for each_lesson in all_lessons %}
       <li>
       {{each_lesson.topic}}
-            <a href="{% url 'update_lesson_route' lesson_id=each_lesson.id %}">Edit</a> 
+            <a href="{% url 'update_lesson_route' lesson_id=each_lesson.id %}" class="btn btn-primary">Edit</a>
+            <a href="{% url 'delete_lesson_route' lesson_id=each_lesson.id %}" class="btn btn-warning">delete</a> 
       </li>
       {% endfor %}
     </ul>

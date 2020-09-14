@@ -49,3 +49,13 @@ def update_lesson(request, lesson_id):
         return render(request, 'update_lessons.template.html', {
             "form": lesson_form
         })
+    
+def delete_lesson(request, lesson_id):
+    lesson_being_deleted = get_object_or_404(Lesson, pk=lesson_id)
+    if request.method == "POST":
+        lesson_being_deleted.delete()
+        return redirect(reverse(all_lessons))
+    else:
+        return render(request, 'delete_lessons.template.html', {
+            "lesson": lesson_being_deleted
+        })
