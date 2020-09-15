@@ -9,7 +9,7 @@ class Lesson(models.Model):
     topic = models.CharField(blank=False, max_length=255)
     price = models.IntegerField(blank=False, default=0)
     teacher = models.ForeignKey(User, on_delete=models.CASCADE)
-
+    
     def __str__(self):
         return self.topic + ' by: ' + self.teacher.username
 

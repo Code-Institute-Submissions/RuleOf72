@@ -59,3 +59,9 @@ def delete_lesson(request, lesson_id):
         return render(request, 'delete_lessons.template.html', {
             "lesson": lesson_being_deleted
         })
+
+def specific_lesson(request, lesson_id):
+    lesson_being_viewed = get_object_or_404(Lesson, pk=lesson_id)
+    return render(request, 'specific_lessons.template.html', {
+        'lesson': lesson_being_viewed
+    })
