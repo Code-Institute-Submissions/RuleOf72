@@ -1,0 +1,14 @@
+{% extends 'base.template.html' %}
+{% load crispy_forms_tags %}
+{%block content%}
+
+<h1>Edit {{sub_topic.title}}</h1>
+<form method="POST" action="{% url 'update_sub_topic_route' sub_topic_id=sub_topic.id lesson_id=lesson.id %}">
+{% csrf_token %}
+{{ form|crispy}}
+<input type="submit"/>
+</form>
+
+
+
+{%endblock%}

@@ -3,10 +3,11 @@
 {% block content %}
 <h1>{{lesson.topic}}</h1>
 <a href="{% url 'add_sub_topic_route' lesson_id=lesson.id %}">Add a topic</a>
-{%for r in lesson.sub_topic_set.all %}
+{% for r in lesson.sub_topic_set.all %}
 <div class="card">
     <h3>{{r.title}}</h3>
     {{r.content}}
+    <a href="{% url 'update_sub_topic_route' sub_topic_id=r.id lesson_id=lesson.id %}">Edit topic</a>
 </div>
 {%endfor%}
 

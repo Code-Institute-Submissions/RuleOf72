@@ -13,7 +13,9 @@ def create_lesson(request):
     if request.method == "POST":
         form = Lessons_form(request.POST)
         if form.is_valid():
-            form.save()
+            lesson = form.save(commit=False)
+            lesson.teacher = request.user
+            lesson.save()
             return HttpResponse("Lesson is added")
         else:
             return render(request, 'create_lessons.template.html', {
@@ -63,7 +65,7 @@ def delete_lesson(request, lesson_id):
 def specific_lesson(request, lesson_id):
     lesson_being_viewed = get_object_or_404(Lesson, pk=lesson_id)
     return render(request, 'specific_lessons.template.html', {
-        'lesson': lesson_being_viewed,
+        'lesson': lesson_being_viewed
     })
 
 def add_sub_topic(request, lesson_id):
@@ -88,4 +90,29 @@ def add_sub_topic(request, lesson_id):
         return render(request, 'add_sub_topic.template.html', {
             'form': form,
             'lesson': lesson_being_viewed
+        })
+
+def update_sub_topic(request, lesson_id, sub_topic_id):
+    # 1. retrieve the book that we are editing
+    topic_being_updated = get_object_or_404(Sub_topic, pk=sub_topic_id)
+    lesson_being_viewed = get_object_or_404(Lesson, pk=lesson_id)
+    # 2. if the update form is submitted
+    sub_topic_form = Subtopics_form(request.POST, instance=topic_being_updated)
+    if request.method == "POST":
+        if sub_topic_form.is_valid():
+            sub_topic_form.save()
+            return redirect(reverse(all_lessons))
+        else:
+            return render(request, 'update_sub_topic.template.html', {
+                "form": sub_topic_form,
+                "lesson": lesson_being_viewed,
+                "sub_topic": topic_being_updated
+            })
+    else:
+        # 4. create a form with the book details filled in
+        sub_topic_form = Subtopics_form(instance=topic_being_updated)
+        return render(request, 'update_sub_topic.template.html', {
+            "form": sub_topic_form,
+            'sub_topic': topic_being_updated,
+            "lesson": lesson_being_viewed
         })
