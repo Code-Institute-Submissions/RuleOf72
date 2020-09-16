@@ -65,3 +65,25 @@ def specific_lesson(request, lesson_id):
     return render(request, 'specific_lessons.template.html', {
         'lesson': lesson_being_viewed
     })
+
+def add_sub_topic(request, lesson_id):
+    lesson_being_viewed = get_object_or_404(Lesson, pk=lesson_id)
+    if request.method == "POST":
+        form = Subtopics_form(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('specific_lesson_route',
+                                    kwargs={
+                                        'lesson_id': lesson_id
+                                    }))
+        else:
+            return render(request, 'add_sub_topic.template.html', {
+                'form': form,
+                'lesson': lesson_being_viewed,
+            })
+    else:
+        form = Subtopics_form()
+        return render(request, 'add_sub_topic.template.html', {
+            'form': form,
+            'lesson': lesson_being_viewed, 
+        })

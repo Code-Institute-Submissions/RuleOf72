@@ -80,3 +80,12 @@ class LessonViewTestCase(TestCase):
         response = self.client.get(f'/lessons/lessons/{lesson.id}/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'specific_lessons.template.html')
+    
+    def test_can_show_add_topic(self):
+        teacher = User.objects.create_user(username='ZZZ')
+        teacher.save()
+        lesson = Lesson(topic='CFD', price=999, teacher=teacher)
+        lesson.save()
+        response = self.client.get(f'/lessons/lessons/{lesson.id}/addtopic/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'add_sub_topic.template.html')

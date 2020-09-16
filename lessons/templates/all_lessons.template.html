@@ -3,14 +3,22 @@
 {% block content %}
 
 <h1>Lessons</h1>
+    <a href="{% url 'create_lesson_route' %}">Create a lesson</a>
     <ul>
       {% for each_lesson in all_lessons %}
-      <li>
-      <a href="{% url 'specific_lesson_route' lesson_id=each_lesson.id %}">{{each_lesson.topic}}</a>
-            <a href="{% url 'update_lesson_route' lesson_id=each_lesson.id %}" class="btn btn-primary">Edit</a>
-            <a href="{% url 'delete_lesson_route' lesson_id=each_lesson.id %}" class="btn btn-warning">delete</a> 
-      </li>
+        <div>
+            <li>
+            <a href="{% url 'specific_lesson_route' lesson_id=each_lesson.id %}">{{each_lesson.topic}}</a>
+                {% for s in lesson.sub_topic_set.all %}
+                    {{s.title}}
+                {% endfor %}
+                    <a href="{% url 'update_lesson_route' lesson_id=each_lesson.id %}" class="btn btn-primary">Edit</a>
+                    <a href="{% url 'delete_lesson_route' lesson_id=each_lesson.id %}" class="btn btn-warning">delete</a> 
+            </li>
+        </div>
       {% endfor %}
+      
+            
     </ul>
 
 {%endblock%}

@@ -2,6 +2,6 @@
 
 {% block content %}
 <h1>{{lesson.topic}}</h1>
-
+<a href="{% url 'add_sub_topic_route' lesson_id=lesson.id %}">Add a topic</a>
 
 {%endblock%}
