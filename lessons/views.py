@@ -1,6 +1,8 @@
 from django.shortcuts import render, HttpResponse, get_object_or_404, redirect, reverse
 from .forms import Lessons_form, Subtopics_form
 from .models import Lesson, Sub_topic
+from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib import messages
 
 # Create your views here.
 def all_lessons(request):
@@ -9,6 +11,7 @@ def all_lessons(request):
         'all_lessons': all_lessons
     })
 
+@login_required
 def create_lesson(request):
     if request.method == "POST":
         form = Lessons_form(request.POST)
@@ -16,7 +19,8 @@ def create_lesson(request):
             lesson = form.save(commit=False)
             lesson.teacher = request.user
             lesson.save()
-            return HttpResponse("Lesson is added")
+            messages.success(request, f"New lesson {form.cleaned_data['topic']} has been created")
+            return redirect(reverse(all_lessons))
         else:
             return render(request, 'create_lessons.template.html', {
                 'form': form
@@ -27,7 +31,7 @@ def create_lesson(request):
             'form': form
         })
 
-
+@login_required
 def update_lesson(request, lesson_id):
     # 1. retrieve the book that we are editing
     lesson_being_updated = get_object_or_404(Lesson, pk=lesson_id)
@@ -51,7 +55,8 @@ def update_lesson(request, lesson_id):
         return render(request, 'update_lessons.template.html', {
             "form": lesson_form
         })
-    
+
+@login_required    
 def delete_lesson(request, lesson_id):
     lesson_being_deleted = get_object_or_404(Lesson, pk=lesson_id)
     if request.method == "POST":
@@ -68,6 +73,7 @@ def specific_lesson(request, lesson_id):
         'lesson': lesson_being_viewed
     })
 
+@login_required
 def add_sub_topic(request, lesson_id):
     form = Subtopics_form(request.POST)
     lesson_being_viewed = get_object_or_404(Lesson, pk=lesson_id)
@@ -92,6 +98,7 @@ def add_sub_topic(request, lesson_id):
             'lesson': lesson_being_viewed
         })
 
+@login_required
 def update_sub_topic(request, lesson_id, sub_topic_id):
     # 1. retrieve the book that we are editing
     topic_being_updated = get_object_or_404(Sub_topic, pk=sub_topic_id)
