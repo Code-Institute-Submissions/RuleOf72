@@ -40,6 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
     'lessons',
     'home',
     'crispy_forms',
@@ -108,6 +112,7 @@ LOGIN_URL = '/accounts/login/'
 # the url to go to if the user has logged in successful
 LOGIN_REDIRECT_URL = '/success'
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 WSGI_APPLICATION = 'RuleOf72Project.wsgi.application'
 
