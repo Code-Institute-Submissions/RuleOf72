@@ -76,6 +76,39 @@ TEMPLATES = [
     },
 ]
 
+
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+SITE_ID = 1
+
+# allows the user to login/register via a username or email
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+
+# the user must specify an email address
+ACCOUNT_EMAIL_REQUIRED = True
+
+# whether the user must verify their email
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+
+# asks the user to enter their email twice
+ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
+
+# minimal length of the user name
+ACCOUNT_USERNAME_MIN_LENGTH = 4
+
+# the url to go to display the login page
+LOGIN_URL = '/accounts/login/'
+
+# the url to go to if the user has logged in successful
+LOGIN_REDIRECT_URL = '/success'
+
+
 WSGI_APPLICATION = 'RuleOf72Project.wsgi.application'
 
 
