@@ -8,6 +8,7 @@
     <h3>{{r.title}}</h3>
     {{r.content}}
     <a href="{% url 'update_sub_topic_route' sub_topic_id=r.id lesson_id=lesson.id %}">Edit topic</a>
+    <a href="{% url 'delete_sub_topic_route' sub_topic_id=r.id lesson_id=lesson.id %}">Delete topic</a>
 </div>
 {%endfor%}
 

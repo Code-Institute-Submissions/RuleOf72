@@ -123,3 +123,15 @@ def update_sub_topic(request, lesson_id, sub_topic_id):
             'sub_topic': topic_being_updated,
             "lesson": lesson_being_viewed
         })
+
+@login_required
+def delete_sub_topic(request, lesson_id, sub_topic_id):
+    topic_being_deleted = get_object_or_404(Sub_topic, pk=sub_topic_id)
+    lesson_being_viewed = get_object_or_404(Lesson, pk=lesson_id)
+    if request.method == "POST":
+        topic_being_deleted.delete()
+        return redirect(reverse(all_lessons))
+    else:
+        return render(request, 'delete_sub_topic.template.html', {
+            "sub_topic": topic_being_deleted
+        })

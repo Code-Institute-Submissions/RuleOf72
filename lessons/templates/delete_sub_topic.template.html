@@ -1,0 +1,10 @@
+{% extends 'base.template.html' %}
+
+{%block content%}
+<h1>Are you sure you want to delete the topic "{{sub_topic.title}}"?</h1>
+<form method="POST">
+    {% csrf_token %}
+    <a href="{% url 'all_lesson_route' %}" class="btn btn-primary">No</a>
+    <input type="submit" class="btn btn-warning" value="Yes">
+<form>
+{%endblock%}
