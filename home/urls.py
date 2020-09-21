@@ -3,6 +3,6 @@ import home.views
 
 
 urlpatterns = [
-    path('', home.views.home),
+    path('', home.views.home, name="home_route"),
     path('success/', home.views.home),
 ]
