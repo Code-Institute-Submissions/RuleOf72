@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'forum',
     'purchases',
+    'star_ratings',
 ]
 
 MIDDLEWARE = [
@@ -169,3 +170,5 @@ STATIC_URL = '/static/'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+
+STAR_RATINGS_RERATE = True

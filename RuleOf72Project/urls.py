@@ -22,4 +22,5 @@ urlpatterns = [
     path('', include('home.urls')),
     path('forum/', include('forum.urls')),
     path('accounts/', include('allauth.urls')),
+    path('ratings/', include('star_ratings.urls', namespace='ratings')),
 ]
