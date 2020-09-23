@@ -14,6 +14,7 @@ class Forum_topic(models.Model):
         return self.commenter.username + "'s thread"
 
 class Forum_comment(models.Model):
+    title = models.CharField(blank=False, max_length=255)
     date_created = models.DateTimeField(auto_now_add=True, blank=True)
     commenter = commenter = models.ForeignKey(User, on_delete=models.CASCADE)
     topic_commented = models.ForeignKey(Forum_topic, on_delete=models.CASCADE)

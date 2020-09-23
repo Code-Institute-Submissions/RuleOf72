@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib import messages
 
 # Create your views here.
+@login_required
 def all_lessons(request):
     all_lessons = Lesson.objects.all()
     return render(request, "all_lessons.template.html", {
