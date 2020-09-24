@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse, get_object_or_404
+from django.shortcuts import render, HttpResponse, get_object_or_404, redirect, reverse
 from lessons.forms import Lessons_form, Subtopics_form
 from lessons.models import Lesson, Sub_topic
 from .forms import Forum_form, Comment_form
@@ -9,28 +9,28 @@ from django.contrib import messages
 
 @login_required
 def show_forum(request):
-    all_lessons = Lesson.objects.all()
-    return render(request, "all_lessons.template.html", {
-        'all_lessons': all_lessons
+    all_forums = Forum_topic.objects.all()
+    return render(request, "all_forums.template.html", {
+        'all_forums': all_forums
     })
 
 @login_required
-def create_lesson(request):
+def create_forum(request):
     if request.method == "POST":
-        form = Lessons_form(request.POST)
+        form = Forum_form(request.POST)
         if form.is_valid():
-            lesson = form.save(commit=False)
-            lesson.teacher = request.user
-            lesson.save()
-            messages.success(request, f"New lesson {form.cleaned_data['topic']} has been created")
+            forum = form.save(commit=False)
+            forum.commenter = request.user
+            forum.save()
+            messages.success(request, f"New Forum Topic {form.cleaned_data['title']} has been created")
             return redirect(reverse(all_lessons))
         else:
-            return render(request, 'create_lessons.template.html', {
+            return render(request, 'create_forums.template.html', {
                 'form': form
             })
     else:
-        form = Lessons_form()
-        return render(request, 'create_lessons.template.html', {
+        form = Forum_form()
+        return render(request, 'create_forums.template.html', {
             'form': form
         })
 
