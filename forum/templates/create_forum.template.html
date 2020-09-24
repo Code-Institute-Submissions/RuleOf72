@@ -5,7 +5,7 @@
 {% block content %}
 <h1>Create a Forum Topic</h1>
 
-<form method="POST">
+<form method="POST" action="{% url 'create_forum_route' lesson_id=lesson.id %}">
     {% csrf_token %}
     {{form|crispy}}
     <input type="submit"/>

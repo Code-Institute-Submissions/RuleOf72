@@ -8,30 +8,36 @@ from django.contrib import messages
 # Create your views here.
 
 @login_required
-def show_forum(request):
-    all_forums = Forum_topic.objects.all()
-    return render(request, "all_forums.template.html", {
-        'all_forums': all_forums
+def show_forum(request, lesson_id):
+    lesson_being_viewed = get_object_or_404(Lesson, pk=lesson_id)
+    return render(request, "forum_topic.template.html", {
+        'lesson': lesson_being_viewed
     })
 
 @login_required
-def create_forum(request):
+def create_forum(request, lesson_id):
+    lesson_being_viewed = get_object_or_404(Lesson, pk=lesson_id)
     if request.method == "POST":
         form = Forum_form(request.POST)
         if form.is_valid():
             forum = form.save(commit=False)
             forum.commenter = request.user
+            forum.lesson_commented = lesson_being_viewed
             forum.save()
             messages.success(request, f"New Forum Topic {form.cleaned_data['title']} has been created")
-            return redirect(reverse(all_lessons))
+            return redirect(reverse('show_forum_route', kwargs={
+                                        'lesson_id': lesson_id
+                                    }))
         else:
-            return render(request, 'create_forums.template.html', {
-                'form': form
+            return render(request, 'create_forum.template.html', {
+                'form': form,
+                'lesson': lesson_being_viewed
             })
     else:
         form = Forum_form()
-        return render(request, 'create_forums.template.html', {
-            'form': form
+        return render(request, 'create_forum.template.html', {
+            'form': form,
+            'lesson': lesson_being_viewed
         })
 
 @login_required
