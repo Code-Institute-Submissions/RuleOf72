@@ -42,9 +42,10 @@ def create_forum(request, lesson_id):
         })
 
 @login_required
-def update_forum(request, topic_id):
+def update_forum(request, lesson_id, topic_id):
     # 1. retrieve the book that we are editing
     forum_being_viewed = get_object_or_404(Forum_topic, pk=topic_id)
+    lesson_being_viewed = get_object_or_404(Lesson, pk=lesson_id)
     # 2. if the update form is submitted
     if request.method == "POST":
 
@@ -53,29 +54,37 @@ def update_forum(request, topic_id):
         forum_form = Forum_form(request.POST, instance=forum_being_viewed)
         if forum_form.is_valid():
             forum_form.save()
-            return redirect(reverse(show_forum))
+            return redirect(reverse('show_forum_route', kwargs={
+                                        'lesson_id': lesson_id
+                                    }))
         else:
             return render(request, 'update_forum.template.html', {
                 "form": forum_form,
-                'discussion': forum_being_viewed
+                "discussion": forum_being_viewed,
+                "lesson": lesson_being_viewed
             })
     else:
         # 4. create a form with the book details filled in
         forum_form = Forum_form(instance=forum_being_viewed)
         return render(request, 'update_forum.template.html', {
             "form": forum_form,
-            'discussion': forum_being_viewed
+            "discussion": forum_being_viewed,
+            "lesson": lesson_being_viewed
         })
 
 @login_required    
-def delete_lesson(request, lesson_id):
-    lesson_being_deleted = get_object_or_404(Lesson, pk=lesson_id)
+def delete_forum(request, lesson_id, topic_id):
+    forum_being_deleted = get_object_or_404(Forum_topic, pk=topic_id)
+    lesson_being_viewed = get_object_or_404(Lesson, pk=lesson_id)
     if request.method == "POST":
-        lesson_being_deleted.delete()
-        return redirect(reverse(all_lessons))
+        forum_being_deleted.delete()
+        return redirect(reverse('show_forum_route', kwargs={
+                                        'lesson_id': lesson_id
+                                    }))
     else:
-        return render(request, 'delete_lessons.template.html', {
-            "lesson": lesson_being_deleted
+        return render(request, 'delete_forum.template.html', {
+            "discussion": forum_being_deleted,
+            "lesson": lesson_being_viewed
         })
 
 def specific_lesson(request, lesson_id):

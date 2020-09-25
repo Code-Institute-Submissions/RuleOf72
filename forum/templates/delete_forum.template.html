@@ -1,0 +1,10 @@
+{% extends 'base.template.html' %}
+
+{%block content%}
+<h1>Are you sure you want to delete the discussion: "{{discussion.title}}"?</h1>
+<form method="POST" action="{% url 'delete_forum_route' lesson_id=lesson.id topic_id=discussion.id %}">
+    {% csrf_token %}
+    <a href="{% url 'show_forum_route' lesson_id=lesson.id %}" class="btn btn-primary">No</a>
+    <input type="submit" class="btn btn-warning" value="Yes">
+<form>
+{%endblock%}
