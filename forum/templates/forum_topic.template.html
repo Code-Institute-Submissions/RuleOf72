@@ -9,8 +9,8 @@
         <div>
             <li>
             <a href="{% url 'show_forum_route' lesson_id=discussion.id %}">{{discussion.title}}</a>
-                <a href="{% url 'update_forum_route' forum_id=discussion.id %}" class="btn btn-primary">Edit</a>
-                <a href="{% url 'delete_forum_route' forum_id=discussion.id %}" class="btn btn-warning">delete</a> 
+                <a href="{% url 'update_forum_route' topic_id=discussion.id %}" class="btn btn-primary">Edit</a>
+                 
             </li>
         </div>
       {% endfor %}

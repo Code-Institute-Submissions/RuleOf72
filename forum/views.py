@@ -42,28 +42,29 @@ def create_forum(request, lesson_id):
         })
 
 @login_required
-def update_lesson(request, lesson_id):
+def update_forum(request, topic_id):
     # 1. retrieve the book that we are editing
-    lesson_being_updated = get_object_or_404(Lesson, pk=lesson_id)
-
+    forum_being_viewed = get_object_or_404(Forum_topic, pk=topic_id)
     # 2. if the update form is submitted
     if request.method == "POST":
 
         # 3. create the form and fill in the user's data. Also specify that
         # this is to update an existing model (the instance argument)
-        lesson_form = Lessons_form(request.POST, instance=lesson_being_updated)
-        if lesson_form.is_valid():
-            lesson_form.save()
-            return redirect(reverse(all_lessons))
+        forum_form = Forum_form(request.POST, instance=forum_being_viewed)
+        if forum_form.is_valid():
+            forum_form.save()
+            return redirect(reverse(show_forum))
         else:
-            return render(request, 'update_lessons.template.html', {
-                "form": lesson_form
+            return render(request, 'update_forum.template.html', {
+                "form": forum_form,
+                'discussion': forum_being_viewed
             })
     else:
         # 4. create a form with the book details filled in
-        lesson_form = Lessons_form(instance=lesson_being_updated)
-        return render(request, 'update_lessons.template.html', {
-            "form": lesson_form
+        forum_form = Forum_form(instance=forum_being_viewed)
+        return render(request, 'update_forum.template.html', {
+            "form": forum_form,
+            'discussion': forum_being_viewed
         })
 
 @login_required    

@@ -1,0 +1,14 @@
+{% extends 'base.template.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+<h1>Update: {{discussion.title}}</h1>
+
+<form method="POST" action="{% url 'update_forum_route' topic_id=discussion.id %}">
+    {% csrf_token %}
+    {{form|crispy}}
+    <input type="submit"/>
+</form>
+
+{%endblock%}
