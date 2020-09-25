@@ -10,9 +10,10 @@ from django.contrib import messages
 @login_required
 def show_forum(request, lesson_id):
     lesson_being_viewed = get_object_or_404(Lesson, pk=lesson_id)
-    return render(request, "forum_topic.template.html", {
-        'lesson': lesson_being_viewed
-    })
+    return render(request, 'forum_topic.template.html', {
+        'lesson': lesson_being_viewed, 
+        'discussions': Forum_topic.objects.filter(lesson_commented_id=lesson_id)
+        })
 
 @login_required
 def create_forum(request, lesson_id):

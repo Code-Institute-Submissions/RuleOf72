@@ -2,15 +2,15 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
-<h1>Welcome to the Forum</h1>
+<h1>Welcome to the Forum for {{lesson.topic}}</h1>
     <a href="{% url 'create_forum_route' lesson_id=lesson.id %}">Create a Discussion</a>
     <ul>
-      {% for each_forum in all_forums %}
+      {% for discussion in discussions %}
         <div>
             <li>
-            <a href="{% url 'specific_forum_route' forum_id=each_forum.id %}">{{each_forum.title}}</a>
-                <a href="{% url 'update_forum_route' forum_id=each_forum.id %}" class="btn btn-primary">Edit</a>
-                <a href="{% url 'delete_forum_route' forum_id=each_forum.id %}" class="btn btn-warning">delete</a> 
+            <a href="{% url 'show_forum_route' lesson_id=discussion.id %}">{{discussion.title}}</a>
+                <a href="{% url 'update_forum_route' forum_id=discussion.id %}" class="btn btn-primary">Edit</a>
+                <a href="{% url 'delete_forum_route' forum_id=discussion.id %}" class="btn btn-warning">delete</a> 
             </li>
         </div>
       {% endfor %}
