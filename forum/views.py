@@ -87,76 +87,11 @@ def delete_forum(request, lesson_id, topic_id):
             "lesson": lesson_being_viewed
         })
 
-def specific_lesson(request, lesson_id):
+@login_required
+def show_specific_topic(request, topic_id, lesson_id):
     lesson_being_viewed = get_object_or_404(Lesson, pk=lesson_id)
-    return render(request, 'specific_lessons.template.html', {
+    topic_being_viewed = get_object_or_404(Forum_topic, pk=topic_id)
+    return render(request, 'specific_forum_topic.template.html', {
+        'discussion': topic_being_viewed,
         'lesson': lesson_being_viewed
-    })
-
-@login_required
-def add_sub_topic(request, lesson_id):
-    form = Subtopics_form(request.POST)
-    lesson_being_viewed = get_object_or_404(Lesson, pk=lesson_id)
-    if request.method == "POST":
-        if form.is_valid():
-            subtopic = form.save(commit=False)
-            subtopic.lesson = get_object_or_404(Lesson, pk=lesson_id)
-            subtopic.save()
-            return redirect(reverse('specific_lesson_route',
-                                    kwargs={
-                                        'lesson_id': lesson_id
-                                    }))
-        else:
-            return render(request, 'add_sub_topic.template.html', {
-                'form': form,
-                'lesson': lesson_being_viewed
-            })
-    else:
-        form = Subtopics_form()
-        return render(request, 'add_sub_topic.template.html', {
-            'form': form,
-            'lesson': lesson_being_viewed
-        })
-
-@login_required
-def update_sub_topic(request, lesson_id, sub_topic_id):
-    # 1. retrieve the book that we are editing
-    topic_being_updated = get_object_or_404(Sub_topic, pk=sub_topic_id)
-    lesson_being_viewed = get_object_or_404(Lesson, pk=lesson_id)
-    # 2. if the update form is submitted
-    sub_topic_form = Subtopics_form(request.POST, instance=topic_being_updated)
-    if request.method == "POST":
-        if sub_topic_form.is_valid():
-            sub_topic_form.save()
-            return redirect(reverse(all_lessons))
-        else:
-            return render(request, 'update_sub_topic.template.html', {
-                "form": sub_topic_form,
-                "lesson": lesson_being_viewed,
-                "sub_topic": topic_being_updated
-            })
-    else:
-        # 4. create a form with the book details filled in
-        sub_topic_form = Subtopics_form(instance=topic_being_updated)
-        return render(request, 'update_sub_topic.template.html', {
-            "form": sub_topic_form,
-            'sub_topic': topic_being_updated,
-            "lesson": lesson_being_viewed
-        })
-
-@login_required
-def delete_sub_topic(request, lesson_id, sub_topic_id):
-    topic_being_deleted = get_object_or_404(Sub_topic, pk=sub_topic_id)
-    lesson_being_viewed = get_object_or_404(Lesson, pk=lesson_id)
-    if request.method == "POST":
-        topic_being_deleted.delete()
-        return redirect(reverse('specific_lesson_route',
-                                    kwargs={
-                                        'lesson_id': lesson_id,
-                                        'sub_topic_id': sub_topic_id
-                                    }))
-    else:
-        return render(request, 'delete_sub_topic.template.html', {
-            "sub_topic": topic_being_deleted,
-            "lesson": lesson_being_viewed
         })

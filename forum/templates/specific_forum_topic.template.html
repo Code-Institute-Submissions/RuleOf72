@@ -1,0 +1,11 @@
+{% extends 'base.template.html' %}
+
+{% block content %}
+<h1>{{lesson.topic}}'s discussion: {{discussion.title}}</h1>
+{% for r in lesson.forum_comment_set.all %}
+<div class="card">
+    <h3>{{r.title}}</h3>
+    {{r.content}}
+</div>
+{%endfor%}
+{%endblock%}

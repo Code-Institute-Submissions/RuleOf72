@@ -7,5 +7,6 @@ urlpatterns = [
     path('create/<lesson_id>/', forum.views.create_forum, name="create_forum_route"),
     path('update/<lesson_id>/<topic_id>/', forum.views.update_forum, name="update_forum_route"),
     path('delete/<lesson_id>/<topic_id>/', forum.views.delete_forum, name="delete_forum_route"),
+    path('<lesson_id>/<topic_id>/', forum.views.show_specific_topic, name="specific_topic_route"),
 ]
 
