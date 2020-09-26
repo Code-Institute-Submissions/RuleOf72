@@ -93,7 +93,7 @@ def show_specific_topic(request, topic_id, lesson_id):
     topic_being_viewed = get_object_or_404(Forum_topic, pk=topic_id)
     return render(request, 'specific_forum_topic.template.html', {
         'discussion': topic_being_viewed,
-        'lesson': lesson_being_viewed
+        'lesson': lesson_being_viewed,
         })
 
 @login_required
@@ -124,4 +124,54 @@ def create_comment(request, lesson_id, topic_id):
             'form': form,
             'lesson': lesson_being_viewed,
             'topic': topic_being_viewed
+        })
+
+@login_required
+def update_comment(request, lesson_id, topic_id, comment_id):
+    # 1. retrieve the book that we are editing
+    forum_being_viewed = get_object_or_404(Forum_topic, pk=topic_id)
+    lesson_being_viewed = get_object_or_404(Lesson, pk=lesson_id)
+    comment_being_viewed = get_object_or_404(Forum_comment, pk=comment_id)
+    # 2. if the update form is submitted
+    if request.method == "POST":
+
+        # 3. create the form and fill in the user's data. Also specify that
+        # this is to update an existing model (the instance argument)
+        comment_form = Comment_form(request.POST, instance=comment_being_viewed)
+        if comment_form.is_valid():
+            comment_form.save()
+            return redirect(reverse('specific_topic_route', kwargs={
+                                        'lesson_id': lesson_id,
+                                        'topic_id': topic_id
+                                    }))
+        else:
+            return render(request, 'update_comment.template.html', {
+                "form": comment_form,
+                "discussion": forum_being_viewed,
+                "lesson": lesson_being_viewed,
+                "comment": comment_being_viewed
+            })
+    else:
+        # 4. create a form with the book details filled in
+        comment_form = Comment_form(instance=comment_being_viewed)
+        return render(request, 'update_comment.template.html', {
+            "form": comment_form,
+            "discussion": forum_being_viewed,
+            "lesson": lesson_being_viewed,
+            "comment": comment_being_viewed
+        })
+
+@login_required    
+def delete_forum(request, lesson_id, topic_id):
+    forum_being_deleted = get_object_or_404(Forum_topic, pk=topic_id)
+    lesson_being_viewed = get_object_or_404(Lesson, pk=lesson_id)
+    if request.method == "POST":
+        forum_being_deleted.delete()
+        return redirect(reverse('show_forum_route', kwargs={
+                                        'lesson_id': lesson_id
+                                    }))
+    else:
+        return render(request, 'delete_forum.template.html', {
+            "discussion": forum_being_deleted,
+            "lesson": lesson_being_viewed
         })
