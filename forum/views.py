@@ -162,16 +162,19 @@ def update_comment(request, lesson_id, topic_id, comment_id):
         })
 
 @login_required    
-def delete_forum(request, lesson_id, topic_id):
-    forum_being_deleted = get_object_or_404(Forum_topic, pk=topic_id)
+def delete_comment(request, lesson_id, topic_id, comment_id):
+    forum_being_viewed = get_object_or_404(Forum_topic, pk=topic_id)
     lesson_being_viewed = get_object_or_404(Lesson, pk=lesson_id)
+    comment_being_viewed = get_object_or_404(Forum_comment, pk=comment_id)
     if request.method == "POST":
-        forum_being_deleted.delete()
-        return redirect(reverse('show_forum_route', kwargs={
-                                        'lesson_id': lesson_id
+        comment_being_viewed.delete()
+        return redirect(reverse('specific_topic_route', kwargs={
+                                        'lesson_id': lesson_id,
+                                        'topic_id': topic_id
                                     }))
     else:
-        return render(request, 'delete_forum.template.html', {
-            "discussion": forum_being_deleted,
-            "lesson": lesson_being_viewed
+        return render(request, 'delete_comment.template.html', {
+            "discussion": forum_being_viewed,
+            "lesson": lesson_being_viewed,
+            "comment": comment_being_viewed
         })
