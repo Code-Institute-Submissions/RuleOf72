@@ -95,3 +95,33 @@ def show_specific_topic(request, topic_id, lesson_id):
         'discussion': topic_being_viewed,
         'lesson': lesson_being_viewed
         })
+
+@login_required
+def create_comment(request, lesson_id, topic_id):
+    lesson_being_viewed = get_object_or_404(Lesson, pk=lesson_id)
+    topic_being_viewed = get_object_or_404(Forum_topic, pk=topic_id)
+    if request.method == "POST":
+        form = Comment_form(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.commenter = request.user
+            comment.topic_commented = topic_being_viewed
+            comment.save()
+            messages.success(request, f"New comment {form.cleaned_data['title']} has been created")
+            return redirect(reverse('specific_topic_route', kwargs={
+                                        'lesson_id': lesson_id,
+                                        'topic_id': topic_id
+                                    }))
+        else:
+            return render(request, 'create_comment.template.html', {
+                'form': form,
+                'lesson': lesson_being_viewed,
+                'topic': topic_being_viewed
+            })
+    else:
+        form = Comment_form()
+        return render(request, 'create_comment.template.html', {
+            'form': form,
+            'lesson': lesson_being_viewed,
+            'topic': topic_being_viewed
+        })

@@ -8,5 +8,6 @@ urlpatterns = [
     path('update/<lesson_id>/<topic_id>/', forum.views.update_forum, name="update_forum_route"),
     path('delete/<lesson_id>/<topic_id>/', forum.views.delete_forum, name="delete_forum_route"),
     path('<lesson_id>/<topic_id>/', forum.views.show_specific_topic, name="specific_topic_route"),
+    path('<lesson_id>/<topic_id>/create/comment/', forum.views.create_comment, name="create_comment_route"),
 ]
 
