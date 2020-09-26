@@ -3,7 +3,7 @@
 {% block content %}
 <h1>{{lesson.topic}}'s discussion: {{discussion.title}}</h1>
 <a href="{% url 'create_comment_route' lesson_id=lesson.id topic_id=discussion.id %}">Comment on this discussion!</a>
-{% for r in lesson.forum_comment_set.all %}
+{% for r in discussion.forum_comment_set.all %}
 <div class="card">
     <h3>{{r.title}}</h3>
     {{r.content}}
