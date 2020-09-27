@@ -1,18 +1,33 @@
 from django.shortcuts import render, HttpResponse, get_object_or_404, redirect, reverse
 from lessons.forms import Lessons_form, Subtopics_form
 from lessons.models import Lesson, Sub_topic
-from .forms import Forum_form, Comment_form
+from .forms import Forum_form, Comment_form, SearchForm
 from .models import Forum_comment, Forum_topic
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib import messages
+from django.db.models import Q
 # Create your views here.
 
 @login_required
 def show_forum(request, lesson_id):
     lesson_being_viewed = get_object_or_404(Lesson, pk=lesson_id)
+    discussions = Forum_topic.objects.filter(lesson_commented_id=lesson_id)
+    if request.GET:
+        # always true query:
+        queries = ~Q(pk__in=[])
+
+        # if a title is specified, add it to the query
+        if 'title' in request.GET and request.GET['title']:
+            title = request.GET['title']
+            queries = queries & Q(title__icontains=title)
+
+        # update the existing review found
+        discussions = discussions.filter(queries)
+    search_form = SearchForm(request.GET)
     return render(request, 'forum_topic.template.html', {
-        'lesson': lesson_being_viewed, 
-        'discussions': Forum_topic.objects.filter(lesson_commented_id=lesson_id)
+        'lesson': lesson_being_viewed,
+        'discussions': discussions,
+        'search_form': search_form
         })
 
 @login_required

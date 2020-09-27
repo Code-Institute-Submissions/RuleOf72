@@ -12,3 +12,6 @@ class Comment_form(forms.ModelForm):
     class Meta:
         model = Forum_comment
         fields = ('title', 'content')
+
+class SearchForm(forms.Form):
+    title = forms.CharField(max_length=255, required=False)
