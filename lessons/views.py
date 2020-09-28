@@ -132,24 +132,33 @@ def update_sub_topic(request, lesson_id, sub_topic_id):
     lesson_being_viewed = get_object_or_404(Lesson, pk=lesson_id)
     # 2. if the update form is submitted
     sub_topic_form = Subtopics_form(request.POST, instance=topic_being_updated)
-    if request.method == "POST":
-        if sub_topic_form.is_valid():
-            sub_topic_form.save()
-            return redirect(reverse(all_lessons))
+    if request.user == lesson_being_viewed.teacher:
+        if request.method == "POST":
+            if sub_topic_form.is_valid():
+                sub_topic_form.save()
+                return redirect(reverse('specific_lesson_route',
+                                        kwargs={
+                                            'lesson_id': lesson_id
+                                        }))
+            else:
+                return render(request, 'update_sub_topic.template.html', {
+                    "form": sub_topic_form,
+                    "lesson": lesson_being_viewed,
+                    "sub_topic": topic_being_updated
+                })
         else:
+            # 4. create a form with the book details filled in
+            sub_topic_form = Subtopics_form(instance=topic_being_updated)
             return render(request, 'update_sub_topic.template.html', {
                 "form": sub_topic_form,
-                "lesson": lesson_being_viewed,
-                "sub_topic": topic_being_updated
+                'sub_topic': topic_being_updated,
+                "lesson": lesson_being_viewed
             })
     else:
-        # 4. create a form with the book details filled in
-        sub_topic_form = Subtopics_form(instance=topic_being_updated)
-        return render(request, 'update_sub_topic.template.html', {
-            "form": sub_topic_form,
-            'sub_topic': topic_being_updated,
-            "lesson": lesson_being_viewed
-        })
+        return redirect(reverse('specific_lesson_route',
+                                        kwargs={
+                                            'lesson_id': lesson_id
+                                        }))
 
 @login_required
 def delete_sub_topic(request, lesson_id, sub_topic_id):
