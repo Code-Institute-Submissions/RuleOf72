@@ -96,16 +96,21 @@ def update_forum(request, lesson_id, topic_id):
 def delete_forum(request, lesson_id, topic_id):
     forum_being_deleted = get_object_or_404(Forum_topic, pk=topic_id)
     lesson_being_viewed = get_object_or_404(Lesson, pk=lesson_id)
-    if request.method == "POST":
-        forum_being_deleted.delete()
-        return redirect(reverse('show_forum_route', kwargs={
-                                        'lesson_id': lesson_id
-                                    }))
+    if request.user == forum_being_deleted.commenter:
+        if request.method == "POST":
+            forum_being_deleted.delete()
+            return redirect(reverse('show_forum_route', kwargs={
+                                            'lesson_id': lesson_id
+                                        }))
+        else:
+            return render(request, 'delete_forum.template.html', {
+                "discussion": forum_being_deleted,
+                "lesson": lesson_being_viewed
+            })
     else:
-        return render(request, 'delete_forum.template.html', {
-            "discussion": forum_being_deleted,
-            "lesson": lesson_being_viewed
-        })
+        return redirect(reverse('show_forum_route', kwargs={
+                                            'lesson_id': lesson_id
+                                        }))
 
 @login_required
 def show_specific_topic(request, topic_id, lesson_id):
