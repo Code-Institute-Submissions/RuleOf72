@@ -16,8 +16,10 @@
                 {% for s in lesson.sub_topic_set.all %}
                     {{s.title}}
                 {% endfor %}
+                {% if request.user == each_lesson.teacher %}
                     <a href="{% url 'update_lesson_route' lesson_id=each_lesson.id %}" class="btn btn-primary">Edit</a>
                     <a href="{% url 'delete_lesson_route' lesson_id=each_lesson.id %}" class="btn btn-warning">delete</a> 
+                {%endif%}
             </li>
         </div>
       {% endfor %}
