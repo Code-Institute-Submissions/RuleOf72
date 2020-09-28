@@ -14,8 +14,10 @@
         <div>
             <li>
             <a href="{% url 'specific_topic_route' lesson_id=lesson.id topic_id=discussion.id %}">{{discussion.title}}</a>
+                {% if request.user == discussion.commenter %}
                 <a href="{% url 'update_forum_route' lesson_id=lesson.id topic_id=discussion.id %}" class="btn btn-primary">Edit</a>
                 <a href="{% url 'delete_forum_route' lesson_id=lesson.id topic_id=discussion.id %}" class="btn btn-warning">delete</a> 
+                {%endif%}
             </li>
         </div>
       {% endfor %}
