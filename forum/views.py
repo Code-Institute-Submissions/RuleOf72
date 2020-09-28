@@ -61,31 +61,36 @@ def update_forum(request, lesson_id, topic_id):
     # 1. retrieve the book that we are editing
     forum_being_viewed = get_object_or_404(Forum_topic, pk=topic_id)
     lesson_being_viewed = get_object_or_404(Lesson, pk=lesson_id)
+    if request.user == forum_being_viewed.commenter:
     # 2. if the update form is submitted
-    if request.method == "POST":
+        if request.method == "POST":
 
-        # 3. create the form and fill in the user's data. Also specify that
-        # this is to update an existing model (the instance argument)
-        forum_form = Forum_form(request.POST, instance=forum_being_viewed)
-        if forum_form.is_valid():
-            forum_form.save()
-            return redirect(reverse('show_forum_route', kwargs={
-                                        'lesson_id': lesson_id
-                                    }))
+            # 3. create the form and fill in the user's data. Also specify that
+            # this is to update an existing model (the instance argument)
+            forum_form = Forum_form(request.POST, instance=forum_being_viewed)
+            if forum_form.is_valid():
+                forum_form.save()
+                return redirect(reverse('show_forum_route', kwargs={
+                                            'lesson_id': lesson_id
+                                        }))
+            else:
+                return render(request, 'update_forum.template.html', {
+                    "form": forum_form,
+                    "discussion": forum_being_viewed,
+                    "lesson": lesson_being_viewed
+                })
         else:
+            # 4. create a form with the book details filled in
+            forum_form = Forum_form(instance=forum_being_viewed)
             return render(request, 'update_forum.template.html', {
                 "form": forum_form,
                 "discussion": forum_being_viewed,
                 "lesson": lesson_being_viewed
             })
     else:
-        # 4. create a form with the book details filled in
-        forum_form = Forum_form(instance=forum_being_viewed)
-        return render(request, 'update_forum.template.html', {
-            "form": forum_form,
-            "discussion": forum_being_viewed,
-            "lesson": lesson_being_viewed
-        })
+        return redirect(reverse('show_forum_route', kwargs={
+                                            'lesson_id': lesson_id
+                                        }))
 
 @login_required    
 def delete_forum(request, lesson_id, topic_id):
