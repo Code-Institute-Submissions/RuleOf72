@@ -10,7 +10,7 @@ class Lesson(models.Model):
     price = models.IntegerField(blank=False, default=0)
     teacher = models.ForeignKey(User, on_delete=models.CASCADE)
     picture = models.ImageField(blank=True, max_length=255)
-    intro = models.TextField(blank=True)
+    introduction = models.TextField(blank=True)
 
     def __str__(self):
         return self.topic + ' by: ' + self.teacher.username

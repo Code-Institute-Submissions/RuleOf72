@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 class Lessons_form(forms.ModelForm):
     class Meta:
         model = Lesson
-        fields = ('topic', 'intro', 'picture', 'price')
+        fields = ('topic', 'introduction', 'picture', 'price')
 
 class Subtopics_form(forms.ModelForm):
     class Meta:
