@@ -197,15 +197,21 @@ def delete_comment(request, lesson_id, topic_id, comment_id):
     forum_being_viewed = get_object_or_404(Forum_topic, pk=topic_id)
     lesson_being_viewed = get_object_or_404(Lesson, pk=lesson_id)
     comment_being_viewed = get_object_or_404(Forum_comment, pk=comment_id)
-    if request.method == "POST":
-        comment_being_viewed.delete()
-        return redirect(reverse('specific_topic_route', kwargs={
-                                        'lesson_id': lesson_id,
-                                        'topic_id': topic_id
-                                    }))
+    if request.user == comment_being_viewed.commenter:
+        if request.method == "POST":
+            comment_being_viewed.delete()
+            return redirect(reverse('specific_topic_route', kwargs={
+                                            'lesson_id': lesson_id,
+                                            'topic_id': topic_id
+                                        }))
+        else:
+            return render(request, 'delete_comment.template.html', {
+                "discussion": forum_being_viewed,
+                "lesson": lesson_being_viewed,
+                "comment": comment_being_viewed
+            })
     else:
-        return render(request, 'delete_comment.template.html', {
-            "discussion": forum_being_viewed,
-            "lesson": lesson_being_viewed,
-            "comment": comment_being_viewed
-        })
+        return redirect(reverse('specific_topic_route', kwargs={
+                                            'lesson_id': lesson_id,
+                                            'topic_id': topic_id
+                                        })) 
