@@ -157,19 +157,29 @@ def update_comment(request, lesson_id, topic_id, comment_id):
     forum_being_viewed = get_object_or_404(Forum_topic, pk=topic_id)
     lesson_being_viewed = get_object_or_404(Lesson, pk=lesson_id)
     comment_being_viewed = get_object_or_404(Forum_comment, pk=comment_id)
+    if request.user == comment_being_viewed.commenter:
     # 2. if the update form is submitted
-    if request.method == "POST":
+        if request.method == "POST":
 
-        # 3. create the form and fill in the user's data. Also specify that
-        # this is to update an existing model (the instance argument)
-        comment_form = Comment_form(request.POST, instance=comment_being_viewed)
-        if comment_form.is_valid():
-            comment_form.save()
-            return redirect(reverse('specific_topic_route', kwargs={
-                                        'lesson_id': lesson_id,
-                                        'topic_id': topic_id
-                                    }))
+            # 3. create the form and fill in the user's data. Also specify that
+            # this is to update an existing model (the instance argument)
+            comment_form = Comment_form(request.POST, instance=comment_being_viewed)
+            if comment_form.is_valid():
+                comment_form.save()
+                return redirect(reverse('specific_topic_route', kwargs={
+                                            'lesson_id': lesson_id,
+                                            'topic_id': topic_id
+                                        }))
+            else:
+                return render(request, 'update_comment.template.html', {
+                    "form": comment_form,
+                    "discussion": forum_being_viewed,
+                    "lesson": lesson_being_viewed,
+                    "comment": comment_being_viewed
+                })
         else:
+            # 4. create a form with the book details filled in
+            comment_form = Comment_form(instance=comment_being_viewed)
             return render(request, 'update_comment.template.html', {
                 "form": comment_form,
                 "discussion": forum_being_viewed,
@@ -177,14 +187,10 @@ def update_comment(request, lesson_id, topic_id, comment_id):
                 "comment": comment_being_viewed
             })
     else:
-        # 4. create a form with the book details filled in
-        comment_form = Comment_form(instance=comment_being_viewed)
-        return render(request, 'update_comment.template.html', {
-            "form": comment_form,
-            "discussion": forum_being_viewed,
-            "lesson": lesson_being_viewed,
-            "comment": comment_being_viewed
-        })
+        return redirect(reverse('specific_topic_route', kwargs={
+                                            'lesson_id': lesson_id,
+                                            'topic_id': topic_id
+                                        }))
 
 @login_required    
 def delete_comment(request, lesson_id, topic_id, comment_id):
