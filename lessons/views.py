@@ -164,15 +164,22 @@ def update_sub_topic(request, lesson_id, sub_topic_id):
 def delete_sub_topic(request, lesson_id, sub_topic_id):
     topic_being_deleted = get_object_or_404(Sub_topic, pk=sub_topic_id)
     lesson_being_viewed = get_object_or_404(Lesson, pk=lesson_id)
-    if request.method == "POST":
-        topic_being_deleted.delete()
-        return redirect(reverse('specific_lesson_route',
-                                    kwargs={
-                                        'lesson_id': lesson_id,
-                                        'sub_topic_id': sub_topic_id
-                                    }))
+    if request.user == lesson_being_viewed.teacher:
+        if request.method == "POST":
+            topic_being_deleted.delete()
+            return redirect(reverse('specific_lesson_route',
+                                        kwargs={
+                                            'lesson_id': lesson_id,
+                                            'sub_topic_id': sub_topic_id
+                                        }))
+        else:
+            return render(request, 'delete_sub_topic.template.html', {
+                "sub_topic": topic_being_deleted,
+                "lesson": lesson_being_viewed
+            })
     else:
-        return render(request, 'delete_sub_topic.template.html', {
-            "sub_topic": topic_being_deleted,
-            "lesson": lesson_being_viewed
-        })
+        return redirect(reverse('specific_lesson_route',
+                                        kwargs={
+                                            'lesson_id': lesson_id,
+                                            'sub_topic_id': sub_topic_id
+                                        }))
