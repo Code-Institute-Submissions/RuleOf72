@@ -3,6 +3,10 @@
 {% block content %}
 
 <h1>Lessons</h1>
+    <form method="GET">
+    {{search_form|crispy}}
+    <input type="submit" value="Search"/>
+    </form>
     <a href="{% url 'create_lesson_route' %}">Create a lesson</a>
     <ul>
       {% for each_lesson in all_lessons %}

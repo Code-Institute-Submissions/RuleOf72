@@ -1,15 +1,30 @@
 from django.shortcuts import render, HttpResponse, get_object_or_404, redirect, reverse
-from .forms import Lessons_form, Subtopics_form
+from .forms import Lessons_form, Subtopics_form, SearchForm
 from .models import Lesson, Sub_topic
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib import messages
+from django.db.models import Q
 
 # Create your views here.
+
 @login_required
 def all_lessons(request):
     all_lessons = Lesson.objects.all()
+    if request.GET:
+        # always true query:
+        queries = ~Q(pk__in=[])
+
+        # if a title is specified, add it to the query
+        if 'topic' in request.GET and request.GET['topic']:
+            topic = request.GET['topic']
+            queries = queries & Q(topic__icontains=topic)
+
+        # update the existing review found
+        all_lessons = all_lessons.filter(queries)
+    search_form = SearchForm(request.GET)
     return render(request, "all_lessons.template.html", {
-        'all_lessons': all_lessons
+        'all_lessons': all_lessons,
+        'search_form': search_form
     })
 
 @login_required
