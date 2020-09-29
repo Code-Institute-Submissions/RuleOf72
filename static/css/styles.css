@@ -79,10 +79,29 @@ body{
 
 /* logout page */
 
-.accounts-style {
+.lout-style {
     background-color:black;
     height: 40vh;
     width: 30vw;
+    opacity: 0.9;
+    margin-top: 10%;
+    padding: 5% 5% 5% 10%;
+    color: white;
+    border: 3px white solid;
+    line-height: 3em;
+    text-decoration: none;
+}
+
+.account-btn a{
+    color: black;
+}
+
+/* sign in page */
+
+.lin-style {
+    background-color:black;
+    height: 60vh;
+    width: 50vw;
     opacity: 0.9;
     margin-top: 10%;
     padding: 5% 5% 5% 10%;
