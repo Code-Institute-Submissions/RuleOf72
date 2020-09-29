@@ -24,7 +24,7 @@ def show_forum(request, lesson_id):
         # update the existing review found
         discussions = discussions.filter(queries)
     search_form = SearchForm(request.GET)
-    return render(request, 'forum_topic.template.html', {
+    return render(request, 'forum/forum_topic.template.html', {
         'lesson': lesson_being_viewed,
         'discussions': discussions,
         'search_form': search_form
@@ -41,17 +41,17 @@ def create_forum(request, lesson_id):
             forum.lesson_commented = lesson_being_viewed
             forum.save()
             messages.success(request, f"New Forum Topic {form.cleaned_data['title']} has been created")
-            return redirect(reverse('show_forum_route', kwargs={
+            return redirect(reverse('forum/show_forum_route', kwargs={
                                         'lesson_id': lesson_id
                                     }))
         else:
-            return render(request, 'create_forum.template.html', {
+            return render(request, 'forum/create_forum.template.html', {
                 'form': form,
                 'lesson': lesson_being_viewed
             })
     else:
         form = Forum_form()
-        return render(request, 'create_forum.template.html', {
+        return render(request, 'forum/create_forum.template.html', {
             'form': form,
             'lesson': lesson_being_viewed
         })
@@ -74,7 +74,7 @@ def update_forum(request, lesson_id, topic_id):
                                             'lesson_id': lesson_id
                                         }))
             else:
-                return render(request, 'update_forum.template.html', {
+                return render(request, 'forum/update_forum.template.html', {
                     "form": forum_form,
                     "discussion": forum_being_viewed,
                     "lesson": lesson_being_viewed
@@ -82,7 +82,7 @@ def update_forum(request, lesson_id, topic_id):
         else:
             # 4. create a form with the book details filled in
             forum_form = Forum_form(instance=forum_being_viewed)
-            return render(request, 'update_forum.template.html', {
+            return render(request, 'forum/update_forum.template.html', {
                 "form": forum_form,
                 "discussion": forum_being_viewed,
                 "lesson": lesson_being_viewed
@@ -103,7 +103,7 @@ def delete_forum(request, lesson_id, topic_id):
                                             'lesson_id': lesson_id
                                         }))
         else:
-            return render(request, 'delete_forum.template.html', {
+            return render(request, 'forum/delete_forum.template.html', {
                 "discussion": forum_being_deleted,
                 "lesson": lesson_being_viewed
             })
@@ -116,7 +116,7 @@ def delete_forum(request, lesson_id, topic_id):
 def show_specific_topic(request, topic_id, lesson_id):
     lesson_being_viewed = get_object_or_404(Lesson, pk=lesson_id)
     topic_being_viewed = get_object_or_404(Forum_topic, pk=topic_id)
-    return render(request, 'specific_forum_topic.template.html', {
+    return render(request, 'forum/specific_forum_topic.template.html', {
         'discussion': topic_being_viewed,
         'lesson': lesson_being_viewed,
         })
@@ -138,14 +138,14 @@ def create_comment(request, lesson_id, topic_id):
                                         'topic_id': topic_id
                                     }))
         else:
-            return render(request, 'create_comment.template.html', {
+            return render(request, 'forum/create_comment.template.html', {
                 'form': form,
                 'lesson': lesson_being_viewed,
                 'topic': topic_being_viewed
             })
     else:
         form = Comment_form()
-        return render(request, 'create_comment.template.html', {
+        return render(request, 'forum/create_comment.template.html', {
             'form': form,
             'lesson': lesson_being_viewed,
             'topic': topic_being_viewed
@@ -171,7 +171,7 @@ def update_comment(request, lesson_id, topic_id, comment_id):
                                             'topic_id': topic_id
                                         }))
             else:
-                return render(request, 'update_comment.template.html', {
+                return render(request, 'forum/update_comment.template.html', {
                     "form": comment_form,
                     "discussion": forum_being_viewed,
                     "lesson": lesson_being_viewed,
@@ -180,7 +180,7 @@ def update_comment(request, lesson_id, topic_id, comment_id):
         else:
             # 4. create a form with the book details filled in
             comment_form = Comment_form(instance=comment_being_viewed)
-            return render(request, 'update_comment.template.html', {
+            return render(request, 'forum/update_comment.template.html', {
                 "form": comment_form,
                 "discussion": forum_being_viewed,
                 "lesson": lesson_being_viewed,
@@ -205,7 +205,7 @@ def delete_comment(request, lesson_id, topic_id, comment_id):
                                             'topic_id': topic_id
                                         }))
         else:
-            return render(request, 'delete_comment.template.html', {
+            return render(request, 'forum/delete_comment.template.html', {
                 "discussion": forum_being_viewed,
                 "lesson": lesson_being_viewed,
                 "comment": comment_being_viewed
