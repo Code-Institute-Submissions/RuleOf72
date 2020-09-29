@@ -7,8 +7,10 @@
             <p class="lead">Jump start your investing journey with our excellent community created courses and immerse yourself in the community with over 5000 members!</p>
         </div>
         <div>
+            {% if not request.user.is_authenticated %}
             <a class="btn account-btn" href="{% url 'account_login' %}">Login</a>
             <a class="btn account-btn" href="{% url 'account_signup' %}">Register</a>
+            {%endif%}
         </div>
     </div>
     <div class="home-intro">
