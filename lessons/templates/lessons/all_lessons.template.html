@@ -1,33 +1,28 @@
 {% extends 'base.template.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-
-<h1>Lessons</h1>
+<div class="container" id="all-lessons-container">
+    <h1>Lessons</h1>
     <form method="GET">
     {{search_form|crispy}}
-    <input type="submit" value="Search"/>
+    <input type="submit" value="Search" class="account-btn w-50"/>
     </form>
-    <a href="{% url 'create_lesson_route' %}">Create a lesson</a>
-    <ul>
+    <button class="create-btn w-50"><a href="{% url 'create_lesson_route' %}">Create a lesson</a></button>
       {% for each_lesson in all_lessons %}
         <div>
-            <li>
-            <a href="{% url 'specific_lesson_route' lesson_id=each_lesson.id %}">{{each_lesson.topic}}</a>
-                {% for s in lesson.sub_topic_set.all %}
-                    {{s.title}}
-                {% endfor %}
-                {% if request.user == each_lesson.teacher %}
-                    <a href="{% url 'update_lesson_route' lesson_id=each_lesson.id %}" class="btn btn-primary">Edit</a>
-                    <a href="{% url 'delete_lesson_route' lesson_id=each_lesson.id %}" class="btn btn-warning">delete</a>
-                {%endif%}
-                {% if request.user != each_lesson.teacher %}
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="{{each_lesson.picture}}">
+                <div class="card-body">
+                    <h5 class="card-title text-center font-weight-bold">{{each_lesson.topic}}</h5>
+                    <p class="card-text text-center">{{each_lesson.introduction}}</p>
+                    <a href="{% url 'specific_lesson_route' lesson_id=each_lesson.id %}" class="btn btn-primary">Learn More</a>
+                    {% if request.user != each_lesson.teacher %}
                     <a href="{% url 'checkout_route' lesson_id=each_lesson.id %}" class="btn btn-success">Buy now</a>
-                {%endif%}
-            </li>
+                    {%endif%}
+                </div>
+            </div>
         </div>
-      {% endfor %}
-      
-            
-    </ul>
+      {% endfor %}    
+</div>
 
 {%endblock%}

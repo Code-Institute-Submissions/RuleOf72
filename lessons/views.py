@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.db.models import Q
+from django.core.paginator import Paginator, EmptyPage
 
 # Create your views here.
 
@@ -26,8 +27,37 @@ def all_lessons(request):
     search_form = SearchForm(request.GET)
     return render(request, "lessons/all_lessons.template.html", {
         'all_lessons': all_lessons,
-        'search_form': search_form
+        'search_form': search_form,
     })
+
+
+# Paginator not working
+# @login_required
+# def all_lessons(request):
+#     all_lessons = Lesson.objects.all()
+#     print(all_lessons)
+#     if request.GET:
+#         # always true query:
+#         queries = ~Q(pk__in=[])
+
+#         # if a title is specified, add it to the query
+#         if 'topic' in request.GET and request.GET['topic']:
+#             topic = request.GET['topic']
+#             queries = queries & Q(topic__icontains=topic)
+
+#         # update the existing review found
+#         all_lessons = all_lessons.filter(queries)
+#     p = Paginator(all_lessons, 4)
+#     page_num = request.GET.get('page', 1)
+#     try:
+#         page = p.page(page_num)
+#     except EmptyPage:
+#         page = p.page(1)
+#     context = {'items': page}
+#     search_form = SearchForm(request.GET)
+#     return render(request, "lessons/all_lessons.template.html", context, {
+#         'search_form': search_form,
+#     })
 
 @login_required
 def create_lesson(request):

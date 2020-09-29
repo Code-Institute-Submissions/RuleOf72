@@ -35,6 +35,7 @@ body{
     margin-top: 0;
     text-align: center;
     color: #F7F7FF;
+    border: 3px white solid;
 }
 
 .account-btn{
@@ -110,3 +111,44 @@ body{
     line-height: 3em;
 }
 
+/* all lessons page */
+
+#all-lessons-container {
+    background-color:black;
+    height: 100vh;
+    width: 80vw;
+    opacity: 0.9;
+    margin-top: 10%;
+    padding: 5% 5% 5% 10%;
+    color: white;
+    border: 3px white solid;
+    line-height: 3em;
+}
+
+.create-btn {
+    height: 50px;
+    width: 100px;
+    border-radius: 25px;
+    background-color: #a9def9;
+    opacity: 0.9;
+    margin: 2%;
+    font-weight: bold;
+}
+
+.create-btn a{
+    color: black;
+}
+
+.create-btn:hover{
+    background-color: #577399;
+    color: black;
+    box-shadow: 1px 1px white;
+}
+
+.card-title {
+    color: black;
+}
+
+.card-text {
+    color: black;
+}
