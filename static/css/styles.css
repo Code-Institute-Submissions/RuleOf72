@@ -1,0 +1,74 @@
+/* home page css */
+body{
+    margin: 0;
+    padding: 0;
+}
+
+.main-bg {
+    position: relative;
+    height: 150vh;
+    width: 100vw;
+}
+
+.main-bg::before{
+    content: "";
+    background-image: url("/static/72bg.jpg");
+    background-size: cover;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    opacity: 0.5;
+}
+
+#home-jumbo{
+    height: 60vh;
+    width: auto;
+    background-color: black;
+    opacity: 0.8;
+    padding-top: 10%;
+    margin-top: 0;
+    text-align: center;
+    color: #F7F7FF;
+}
+
+.account-btn{
+    height: 50px;
+    width: 100px;
+    border-radius: 25px;
+    background-color: #F7F7FF;
+    opacity: 0.8;
+    margin: 2%;
+    font-weight: bold;
+}
+
+.account-btn:hover {
+    background-color: #577399;
+    color: black;
+    box-shadow: 1px 1px white;
+}
+
+.home-intro {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10%;
+}
+
+.home-intro-text {
+    padding-top: 8%;
+    border-radius: 50%;
+    background-color: black;
+    opacity: 0.8;
+    height: 300px;
+    width: 300px;
+    text-align: center;
+    font-weight: bold;
+    color: #F7F7FF;
+}
+
+.home-intro-text:hover {
+    background-color: #BDD5EA;
+    color: black;
+    box-shadow: 3px 3px 3px 3px black;
+}

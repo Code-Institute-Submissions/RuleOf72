@@ -1,6 +1,22 @@
 {% extends 'base.template.html' %}
 {%block content%}
-<h1>The home page works</h1>
+<div class="container-fluid">
+    <div class="jumbotron jumbotron-fluid" id="home-jumbo">
+        <div class="container" id="home-jumbo-text">
+            <h1 class="display-4">Welcome to the Rule Of 72</h1>
+            <p class="lead">Jump start your investing journey with our excellent community created courses and immerse yourself in the community with over 5000 members!</p>
+        </div>
+        <div>
+            <a class="btn account-btn" href="{% url 'account_login' %}">Login</a>
+            <a class="btn account-btn" href="{% url 'account_signup' %}">Register</a>
+        </div>
+    </div>
+    <div class="home-intro">
+        <p class="home-intro-text">Learn 100+ different financial courses at an affordable price.</p>
+        <p class="home-intro-text">Voted most friendly for beginners 5 years in a row!</p>
+        <p class="home-intro-text">One of the largest forums available!</p>
+    </div>
+</div>
 
 
 
