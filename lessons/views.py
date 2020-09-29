@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponse, get_object_or_404, redirect, reverse
 from .forms import Lessons_form, Subtopics_form, SearchForm
 from .models import Lesson, Sub_topic
+from purchases.models import Purchase
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -190,4 +191,11 @@ def created_lessons(request):
     lessons = Lesson.objects.filter(teacher=request.user)
     return render(request, "lessons/created_lessons.template.html", {
         'lessons': lessons
+    })
+
+@login_required
+def purchased_lessons(request):
+    purchase = Purchase.objects.filter(student=request.user)
+    return render(request, "lessons/purchased_lessons.template.html", {
+        'lessons': purchase
     })

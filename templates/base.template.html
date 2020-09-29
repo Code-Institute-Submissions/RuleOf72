@@ -28,10 +28,10 @@
                 </li>
                 {% if request.user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'all_lesson_route' %}">Purchased Lessons</a>
+                    <a class="nav-link" href="{% url 'purchased_lesson_route' %}">Purchased Lessons</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'all_lesson_route' %}">Created Lessons</a>
+                    <a class="nav-link" href="{% url 'created_lesson_route' %}">Created Lessons</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
