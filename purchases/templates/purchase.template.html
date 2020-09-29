@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form method="POST">
+      {% csrf_token %}
+      <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+              data-key="{{ publishable_key }}"
+              data-description="Payment for: {{lesson.topic}}"
+              data-amount="{{price}}"
+              data-locale="auto"></script>
+      <input type='hidden' name='price' value='{{price}}'/>
+    </form>
+
+{% endblock %}
