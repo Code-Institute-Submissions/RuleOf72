@@ -2,9 +2,13 @@
 body{
     margin: 0;
     padding: 0;
+    background-image: url("/static/72bg.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: fixed;
 }
 
-.main-bg {
+/* .main-bg {
     position: relative;
     height: 150vh;
     width: 100vw;
@@ -20,13 +24,13 @@ body{
     bottom: 0px;
     left: 0px;
     opacity: 0.5;
-}
+} */
 
 #home-jumbo{
     height: 60vh;
     width: auto;
     background-color: black;
-    opacity: 0.8;
+    opacity: 0.9;
     padding-top: 10%;
     margin-top: 0;
     text-align: center;
@@ -38,7 +42,7 @@ body{
     width: 100px;
     border-radius: 25px;
     background-color: #F7F7FF;
-    opacity: 0.8;
+    opacity: 0.9;
     margin: 2%;
     font-weight: bold;
 }
@@ -59,7 +63,7 @@ body{
     padding-top: 8%;
     border-radius: 50%;
     background-color: black;
-    opacity: 0.8;
+    opacity: 0.9;
     height: 300px;
     width: 300px;
     text-align: center;
@@ -72,3 +76,18 @@ body{
     color: black;
     box-shadow: 3px 3px 3px 3px black;
 }
+
+/* logout page */
+
+.accounts-style {
+    background-color:black;
+    height: 40vh;
+    width: 30vw;
+    opacity: 0.9;
+    margin-top: 10%;
+    padding: 5% 5% 5% 10%;
+    color: white;
+    border: 3px white solid;
+    line-height: 3em;
+}
+
