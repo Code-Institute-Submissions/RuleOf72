@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 import json
 import stripe
 from lessons.models import Lesson
+from .models import Purchase
 
 def checkout(request, lesson_id):
     stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -14,10 +15,10 @@ def checkout(request, lesson_id):
     lesson = get_object_or_404(Lesson, pk=lesson_id)
     stripe_publishable_key = settings.STRIPE_PUBLISHABLE_KEY
     line_items = [{
-            "name": 'lesson_name',
+            "name": lesson.topic,
             # multiply the actual cost of the book to represent
             # the cost in cents and must be in integer
-            "amount": 999,
+            "amount": lesson.price,
             "quantity": 1,
             "currency": "usd"
         }]
@@ -30,7 +31,7 @@ def checkout(request, lesson_id):
                 cancel_url=domain + reverse('checkout_cancelled_route'),
                 metadata={
                     "data": json.dumps({
-                        'lesson_id': 'success'
+                        'lesson_id': lesson.id
                     })
                 }
             )
@@ -74,7 +75,14 @@ def payment_completed(request):
 
 def handle_payment(session):
     user = get_object_or_404(User, pk=session["client_reference_id"])
-    
+    metadata = json.loads(session['metadata']['data'])
+    lesson = get_object_or_404(Lesson, pk=metadata['lesson_id'])
+
+    purchase = Purchase()
+    purchase.lesson_purchased = lesson
+    purchase.student = user
+    purchase.price = lesson.price
+    purchase.save()
 
 
 # from django.shortcuts import render, get_object_or_404, HttpResponse, reverse
