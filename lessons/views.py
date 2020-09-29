@@ -3,6 +3,7 @@ from .forms import Lessons_form, Subtopics_form, SearchForm
 from .models import Lesson, Sub_topic
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib import messages
+from django.contrib.auth.models import User
 from django.db.models import Q
 
 # Create your views here.
@@ -183,3 +184,10 @@ def delete_sub_topic(request, lesson_id, sub_topic_id):
                                             'lesson_id': lesson_id,
                                             'sub_topic_id': sub_topic_id
                                         }))
+
+@login_required
+def created_lessons(request):
+    lessons = Lesson.objects.filter(teacher=request.user)
+    return render(request, "lessons/created_lessons.template.html", {
+        'lessons': lessons
+    })
