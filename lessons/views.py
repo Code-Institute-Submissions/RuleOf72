@@ -136,7 +136,7 @@ def add_sub_topic(request, lesson_id):
                 subtopic = form.save(commit=False)
                 subtopic.lesson = get_object_or_404(Lesson, pk=lesson_id)
                 subtopic.save()
-                return redirect(reverse('lessons/specific_lesson_route',
+                return redirect(reverse('specific_lesson_route',
                                         kwargs={
                                             'lesson_id': lesson_id
                                         }))
@@ -224,7 +224,7 @@ def created_lessons(request):
 
 @login_required
 def purchased_lessons(request):
-    purchase = Purchase.objects.filter(student=request.user)
+    lesson = Lesson.objects.filter().prefetch_related('purchased')
     return render(request, "lessons/purchased_lessons.template.html", {
-        'lessons': purchase
+        'lessons': lesson
     })
