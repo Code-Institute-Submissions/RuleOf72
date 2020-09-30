@@ -35,7 +35,6 @@ def all_lessons(request):
 # @login_required
 # def all_lessons(request):
 #     all_lessons = Lesson.objects.all()
-#     print(all_lessons)
 #     if request.GET:
 #         # always true query:
 #         queries = ~Q(pk__in=[])

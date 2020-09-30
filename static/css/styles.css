@@ -6,6 +6,8 @@ body{
     background-size: cover;
     background-repeat: no-repeat;
     background-position: fixed;
+    width: 100vw;
+    min-height: 100vh;
 }
 
 /* .main-bg {
@@ -51,7 +53,7 @@ body{
 .account-btn:hover {
     background-color: #577399;
     color: black;
-    box-shadow: 1px 1px white;
+    box-shadow: 0 0 6px 6px white;
 }
 
 .home-intro {
@@ -61,21 +63,64 @@ body{
 }
 
 .home-intro-text {
-    padding-top: 8%;
+    padding: 100px 5% 0 5%;
     border-radius: 50%;
+    border: 3px solid white;
     background-color: black;
     opacity: 0.9;
     height: 300px;
     width: 300px;
+    overflow: hidden;
     text-align: center;
     font-weight: bold;
     color: #F7F7FF;
+    margin: 0;
+    margin-top: 5vh;
+}
+
+@media only screen and (max-width: 1000px) {
+    body {
+    margin: 0;
+    padding: 0;
+    background-image: url("/static/72bg.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: fixed;
+    width: 100vw;
+}
+
+  .home-intro{
+      display: block;
+      margin-left: 25%;
+      margin-right: 25%;
+      margin-top: 5%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+    .home-intro {
+        display: block;
+        margin-top: 5%;
+        width: 100vw;
+    }
+
+    #home-jumbo {
+        height: 80vh;
+        width: auto;
+        background-color: black;
+        opacity: 0.9;
+        padding-top: 10%;
+        margin-top: 0;
+        text-align: center;
+        color: #F7F7FF;
+        border: 3px white solid;
+    }
 }
 
 .home-intro-text:hover {
     background-color: #BDD5EA;
     color: black;
-    box-shadow: 3px 3px 3px 3px black;
+    box-shadow: 0 0 10px 10px black;
 }
 
 /* logout page */
@@ -115,14 +160,12 @@ body{
 
 #all-lessons-container {
     background-color:black;
-    height: 100vh;
+    height: auto;
     width: 80vw;
     opacity: 0.9;
-    margin-top: 10%;
-    padding: 5% 5% 5% 10%;
-    color: white;
-    border: 3px white solid;
+    padding: 5% 5% 5% 5%;
     line-height: 3em;
+    color: white;
 }
 
 .create-btn {
@@ -142,7 +185,7 @@ body{
 .create-btn:hover{
     background-color: #577399;
     color: black;
-    box-shadow: 1px 1px white;
+    box-shadow: 0 0 6px 6px white;
 }
 
 .card-title {
