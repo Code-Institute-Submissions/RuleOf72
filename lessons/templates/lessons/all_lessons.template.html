@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <div class="container" id="all-lessons-container">
-    <h1>Lessons</h1>
+    <h1>Search for a lesson</h1>
     <form method="GET">
     {{search_form|crispy}}
     <input type="submit" value="Search" class="account-btn w-100"/>
@@ -12,9 +12,11 @@
       {% for each_lesson in all_lessons %}
         <div class="card m-2" style="width: 18rem;">
             <img class="card-img-top" src="{{each_lesson.picture}}">
+            {{each_lesson.picture}}
             <div class="card-body">
                 <h5 class="card-title text-center font-weight-bold">{{each_lesson.topic}}</h5>
                 <p class="card-text text-center">{{each_lesson.introduction}}</p>
+                <p class="card-text text-center">${{each_lesson.price}}</p>
                 <a href="{% url 'specific_lesson_route' lesson_id=each_lesson.id %}" class="btn btn-primary">Learn More</a>
                 {% if request.user != each_lesson.teacher %}
                 <a href="{% url 'checkout_route' lesson_id=each_lesson.id %}" class="btn btn-success">Buy now</a>

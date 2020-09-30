@@ -5,6 +5,7 @@
 <h1>Purchased Lessons</h1>
     <ul>
       {% for each_lesson in lessons %}
+      {{each_lesson.topic}}
         <div>
             <li>
             <a href="{% url 'specific_lesson_route' lesson_id=each_lesson.id %}">{{each_lesson.topic}}</a>

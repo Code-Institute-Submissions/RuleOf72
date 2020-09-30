@@ -178,3 +178,6 @@ STRIPE_ENDPOINT_SECRET = os.environ.get('STRIPE_ENDPOINT_SECRET')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static")
 ]
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'

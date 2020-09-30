@@ -9,7 +9,7 @@ class Lesson(models.Model):
     topic = models.CharField(blank=False, max_length=255)
     price = models.IntegerField(blank=False, default=0)
     teacher = models.ForeignKey(User, on_delete=models.CASCADE)
-    picture = models.ImageField(blank=True, max_length=255)
+    picture = models.ImageField(upload_to="gallery")
     introduction = models.TextField(blank=True)
 
     def __str__(self):

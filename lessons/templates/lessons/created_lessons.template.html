@@ -2,19 +2,25 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
-<h1>Created Lessons</h1>
-    <a href="{% url 'create_lesson_route' %}">Create a lesson</a>
-      {% for each_lesson in lessons %}
-        <div>
-            <a href="{% url 'specific_lesson_route' lesson_id=each_lesson.id %}">{{each_lesson.topic}}</a>
-                {% for s in lesson.sub_topic_set.all %}
-                    {{s.title}}
-                {% endfor %}
-                {% if request.user == each_lesson.teacher %}
-                    <a href="{% url 'update_lesson_route' lesson_id=each_lesson.id %}" class="btn btn-primary">Edit</a>
-                    <a href="{% url 'delete_lesson_route' lesson_id=each_lesson.id %}" class="btn btn-warning">delete</a>
-                {%endif%}
+<div class="container" id="all-lessons-container">
+    <h1>My Lessons</h1>
+    <button class="create-btn w-100"><a href="{% url 'create_lesson_route' %}">Create a lesson</a></button>
+    <div class="row row-cols-1 row-cols-lg-2 d-flex justify-content-center align-items-center mt-3">
+      {% for each_lesson in all_lessons %}
+        <div class="card m-2" style="width: 18rem;">
+            <img class="card-img-top" src="{{each_lesson.picture}}">
+            {{each_lesson.picture}}
+            <div class="card-body">
+                <h5 class="card-title text-center font-weight-bold">{{each_lesson.topic}}</h5>
+                <p class="card-text text-center">{{each_lesson.introduction}}</p>
+                <p class="card-text text-center">${{each_lesson.price}}</p>
+                <a href="{% url 'update_lesson_route' lesson_id=each_lesson.id %}" class="btn btn-primary">Update</a>
+                <a href="{% url 'delete_lesson_route' lesson_id=each_lesson.id %}" class="btn btn-primary">Delete</a>
+            </div>
         </div>
+        
       {% endfor %}
+    </div>  
+</div>
 
 {%endblock%}

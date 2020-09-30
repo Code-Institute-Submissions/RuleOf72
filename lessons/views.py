@@ -217,9 +217,9 @@ def delete_sub_topic(request, lesson_id, sub_topic_id):
 
 @login_required
 def created_lessons(request):
-    lessons = Lesson.objects.filter(teacher=request.user)
+    all_lessons = Lesson.objects.filter(teacher=request.user)
     return render(request, "lessons/created_lessons.template.html", {
-        'lessons': lessons
+        'all_lessons': all_lessons
     })
 
 @login_required
