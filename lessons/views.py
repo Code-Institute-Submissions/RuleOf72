@@ -136,7 +136,7 @@ def add_sub_topic(request, lesson_id):
                 subtopic = form.save(commit=False)
                 subtopic.lesson = get_object_or_404(Lesson, pk=lesson_id)
                 subtopic.save()
-                return redirect(reverse('specific_lesson_route',
+                return redirect(reverse('lessons/specific_lesson_route',
                                         kwargs={
                                             'lesson_id': lesson_id
                                         }))
@@ -198,7 +198,7 @@ def delete_sub_topic(request, lesson_id, sub_topic_id):
     if request.user == lesson_being_viewed.teacher:
         if request.method == "POST":
             topic_being_deleted.delete()
-            return redirect(reverse('lessons/specific_lesson_route',
+            return redirect(reverse('specific_lesson_route',
                                         kwargs={
                                             'lesson_id': lesson_id,
                                             'sub_topic_id': sub_topic_id
@@ -224,7 +224,7 @@ def created_lessons(request):
 
 @login_required
 def purchased_lessons(request):
-    lesson = Lesson.objects.filter().prefetch_related('purchased')
+    lesson = Purchase.objects.filter(student=request.user)
     return render(request, "lessons/purchased_lessons.template.html", {
         'lessons': lesson
     })
