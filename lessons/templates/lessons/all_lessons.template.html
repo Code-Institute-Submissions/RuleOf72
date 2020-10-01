@@ -1,5 +1,6 @@
 {% extends 'base.template.html' %}
 {% load crispy_forms_tags %}
+{% load cloudinary %}
 {% block content %}
 <div class="container" id="all-lessons-container">
     <h1>Search for a lesson</h1>
@@ -11,8 +12,7 @@
     <div class="row row-cols-1 row-cols-lg-2 d-flex justify-content-center align-items-center  mt-3">
       {% for each_lesson in all_lessons %}
         <div class="card m-2" style="width: 18rem;">
-            <img class="card-img-top" src="{{each_lesson.picture}}">
-            {{each_lesson.picture}}
+            {% cloudinary each_lesson.picture class="card-img-top" %}
             <div class="card-body">
                 <h5 class="card-title text-center font-weight-bold">{{each_lesson.topic}}</h5>
                 <p class="card-text text-center">{{each_lesson.introduction}}</p>

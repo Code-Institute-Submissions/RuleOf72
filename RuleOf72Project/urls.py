@@ -27,5 +27,4 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('purchases/', include('purchases.urls')),
 ]
-urlpatterns += staticfiles_urlpatterns()
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
