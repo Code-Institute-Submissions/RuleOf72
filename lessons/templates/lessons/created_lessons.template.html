@@ -1,27 +1,71 @@
-{% extends 'base.template.html' %}
-{% load crispy_forms_tags %}
-{% load cloudinary %}
+{% extends 'base.template.html' %} 
+{% load crispy_forms_tags %} 
+{% load cloudinary %} 
 {% block content %}
-
 <div class="container" id="all-lessons-container">
     <h1>My Lessons</h1>
-    <button class="create-btn w-100"><a href="{% url 'create_lesson_route' %}">Create a lesson</a></button>
-    <div class="row row-cols-1 row-cols-lg-2 d-flex justify-content-center align-items-center mt-3">
-      {% for each_lesson in all_lessons %}
-        <div class="card m-2" style="width: 18rem;">
-            <img class="card-img-top" src="{{each_lesson.picture}}">
-            {{each_lesson.picture}}
-            <div class="card-body">
-                <h5 class="card-title text-center font-weight-bold">{{each_lesson.topic}}</h5>
-                <p class="card-text text-center">{{each_lesson.introduction}}</p>
-                <p class="card-text text-center">${{each_lesson.price}}</p>
-                <a href="{% url 'update_lesson_route' lesson_id=each_lesson.id %}" class="btn btn-primary">Update</a>
-                <a href="{% url 'delete_lesson_route' lesson_id=each_lesson.id %}" class="btn btn-primary">Delete</a>
+  <button class="create-btn w-100">
+    <a href="{% url 'create_lesson_route' %}">Create a lesson</a>
+  </button>
+  <div class="row row-cols-1 row-cols-lg-2 d-flex justify-content-center align-items-center mt-3">
+    {% for each_lesson in all_lessons %}
+    <div class="card m-2" style="width: 18rem;">
+      {% cloudinary each_lesson.picture class="card-img-top" %}
+      <div class="card-body">
+        <h5 class="card-title text-center font-weight-bold">
+          {{each_lesson.topic}}
+        </h5>
+        <hr class="my-4" />
+        <div id="accordion_{{each_lesson.id}}">
+          <div class="card">
+            <div class="card-header" id="intro_{{each_lesson.id}}">
+              <h5 class="mb-0">
+                <button
+                  class="btn btn-link"
+                  data-toggle="collapse"
+                  data-target="#collapse_{{each_lesson.id}}"
+                  aria-expanded="false"
+                  aria-controls="collapse_{{each_lesson.id}}"
+                >
+                  Introduction
+                </button>
+              </h5>
             </div>
-        </div>
-        
-      {% endfor %}
-    </div>  
-</div>
 
-{%endblock%}
+            <div
+              id="collapse_{{each_lesson.id}}"
+              class="collapse show"
+              aria-labelledby="intro_{{each_lesson.id}}"
+              data-parent="#accordion_{{each_lesson.id}}"
+            >
+              <div class="card-body">
+                <p class="card-text text-center">
+                About this Lesson: {{each_lesson.introduction}}
+                </p>
+              </div>
+            </div>
+          </div>
+          <hr class="my-4" />
+          <p class="card-text text-center">Price: ${{each_lesson.price}}</p>
+          <hr class="my-4" />
+          <a
+            href="{% url 'specific_lesson_route' lesson_id=each_lesson.id %}"
+            class="btn create-btn"
+            >Details</a
+          >
+          {% if request.user != each_lesson.teacher %}
+          <a
+            href="{% url 'checkout_route' lesson_id=each_lesson.id %}"
+            class="btn btn-success"
+            >Buy now</a
+          >
+          {%endif%}
+        </div>
+      </div>
+
+      {% endfor %}
+    </div>
+  </div>
+
+  {%endblock%}
+</div>
