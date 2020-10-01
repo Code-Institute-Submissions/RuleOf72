@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'forum',
     'purchases',
     'star_ratings',
+    'cloudinary',
 ]
 
 MIDDLEWARE = [
@@ -181,3 +182,9 @@ STATICFILES_DIRS = [
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+CLOUDINARY = {
+    'cloud_name': os.environ.get("CLOUDINARY_CLOUD_NAME"),
+    'api_key': os.environ.get("CLOUDINARY_API_KEY"),
+    'api_secret': os.environ.get("CLOUDINARY_API_SECRET"),
+}

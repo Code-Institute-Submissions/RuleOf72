@@ -1,6 +1,7 @@
 from django.db import models
 from datetime import datetime
 from django.contrib.auth.models import User
+from cloudinary.models import CloudinaryField
 
 # Create your models here.
 
@@ -9,7 +10,7 @@ class Lesson(models.Model):
     topic = models.CharField(blank=False, max_length=255)
     price = models.IntegerField(blank=False, default=0)
     teacher = models.ForeignKey(User, on_delete=models.CASCADE)
-    picture = models.ImageField(upload_to="gallery")
+    picture = CloudinaryField()
     introduction = models.TextField(blank=True)
 
     def __str__(self):

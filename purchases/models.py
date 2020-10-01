@@ -1,6 +1,7 @@
 from django.db import models
 from lessons.models import Lesson
 from django.contrib.auth.models import User
+from cloudinary.models import CloudinaryField
 # Create your models here.
 
 class Purchase(models.Model):
