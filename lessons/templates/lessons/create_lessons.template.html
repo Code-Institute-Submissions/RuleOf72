@@ -5,22 +5,22 @@
 
 
 {%block content %}
-<div id="form">
-    <form method="POST" enctype="multipart/form-data">
+<div>
+    <form method="POST" enctype="multipart/form-data" id="form">
         {%csrf_token%}
         {{form|crispy}}
         <input type="submit"/>
     </form>
 </div>
 
- <div class="status">
+<div class="status">
       <h2>Status</h2>
       <span class="status_value">Idle</span>
 </div>
 
-  <div class="uploaded_info_holder">
+<div class="uploaded_info_holder">
   
-  </div>
+</div>
 
 {%endblock%}
 

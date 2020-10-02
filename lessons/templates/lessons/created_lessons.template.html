@@ -7,9 +7,9 @@
   <button class="create-btn w-100">
     <a href="{% url 'create_lesson_route' %}">Create a lesson</a>
   </button>
+  {% for each_lesson in all_lessons %}
   <div class="row row-cols-1 row-cols-lg-2 d-flex justify-content-center align-items-center mt-3">
-    {% for each_lesson in all_lessons %}
-    <div class="card m-2" style="width: 18rem;">
+    <div class="card lesson-card" style="width: 18rem;">
       {% cloudinary each_lesson.picture class="card-img-top" %}
       <div class="card-body">
         <h5 class="card-title text-center font-weight-bold">
@@ -62,10 +62,8 @@
           {%endif%}
         </div>
       </div>
-
-      {% endfor %}
     </div>
   </div>
-
+    {% endfor %}
   {%endblock%}
 </div>

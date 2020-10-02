@@ -188,6 +188,11 @@ body{
     box-shadow: 0 0 6px 6px white;
 }
 
+.lesson-card {
+    border: 3px white solid !important;
+    height: 100%;
+}
+
 .card-title {
     color: black;
 }

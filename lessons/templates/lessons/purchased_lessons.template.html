@@ -4,9 +4,9 @@
 {% block content %}
 <div class="container" id="all-lessons-container">
     <h1>My Purchased Lessons</h1>
-  <div class="row row-cols-1 row-cols-lg-2 d-flex justify-content-center align-items-center mt-3">
     {% for each_lesson in lessons %}
-    <div class="card m-2" style="width: 18rem;">
+  <div class="row row-cols-1 row-cols-lg-2 d-flex justify-content-center align-items-center mt-3">
+    <div class="card lesson-card" style="width: 18rem;">
       {% cloudinary each_lesson.picture class="card-img-top" %}
       <div class="card-body">
         <h5 class="card-title text-center font-weight-bold">
@@ -59,10 +59,8 @@
           {%endif%}
         </div>
       </div>
-
-      {% endfor %}
     </div>
   </div>
-
+    {% endfor %}
   {%endblock%}
 </div>

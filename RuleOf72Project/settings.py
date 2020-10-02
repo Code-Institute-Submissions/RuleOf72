@@ -17,7 +17,7 @@ from dotenv import load_dotenv
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-load_dotenv(os.path.join(BASE_DIR,'.env'))
+load_dotenv(os.path.join(BASE_DIR, '.env'))
 
 
 # Quick-start development settings - unsuitable for production
@@ -44,12 +44,12 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'cloudinary',
     'lessons',
     'home',
     'crispy_forms',
     'forum',
     'purchases',
-    'cloudinary',
 ]
 
 MIDDLEWARE = [
@@ -180,7 +180,8 @@ STATICFILES_DIRS = [
 ]
 
 CLOUDINARY = {
-    'cloud_name': os.environ.get("CLOUDINARY_CLOUD_NAME"),
-    'api_key': os.environ.get("CLOUDINARY_API_KEY"),
-    'api_secret': os.environ.get("CLOUDINARY_API_SECRET"),
+    'cloud_name': os.environ.get('CLOUDINARY_CLOUD_NAME'),
+    'api_key': os.environ.get('CLOUDINARY_API_KEY'),
+    'api_secret': os.environ.get('CLOUDINARY_API_SECRET'),
 }
+

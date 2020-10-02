@@ -11,9 +11,9 @@
   <button class="create-btn w-100">
     <a href="{% url 'create_lesson_route' %}">Create a lesson</a>
   </button>
-  <div class="row row-cols-1 row-cols-lg-2 d-flex justify-content-center align-items-center mt-3">
-    {% for each_lesson in all_lessons %}
-    <div class="card m-2" style="width: 18rem;">
+  {% for each_lesson in all_lessons %}
+  <div class="row row-cols-1 row-cols-lg-2 d-flex justify-content-center align-items-center mt-3 mb-3">
+    <div class="card lesson-card" style="width: 18rem;">
       {% cloudinary each_lesson.picture class="card-img-top" %}
       <div class="card-body">
         <h5 class="card-title text-center font-weight-bold">
@@ -38,7 +38,7 @@
 
             <div
               id="collapse_{{each_lesson.id}}"
-              class="collapse show"
+              class="collapse"
               aria-labelledby="intro_{{each_lesson.id}}"
               data-parent="#accordion_{{each_lesson.id}}"
             >
@@ -67,9 +67,9 @@
         </div>
       </div>
 
-      {% endfor %}
+     
     </div>
   </div>
-
+     {% endfor %}
   {%endblock%}
 </div>
