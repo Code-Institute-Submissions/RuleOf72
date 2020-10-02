@@ -86,26 +86,40 @@ body{
     background-size: cover;
     background-repeat: no-repeat;
     background-position: fixed;
-    width: 100vw;
 }
 
-  .home-intro{
-      display: block;
-      margin-left: 25%;
-      margin-right: 25%;
-      margin-top: 5%;
+  .home-intro-text {
+      margin: 2% auto;
   }
 }
 
 @media only screen and (max-width: 600px) {
     .home-intro {
-        display: block;
         margin-top: 5%;
-        width: 100vw;
     }
 
     #home-jumbo {
         height: 80vh;
+        width: auto;
+        background-color: black;
+        opacity: 0.9;
+        padding-top: 10%;
+        margin-top: 0;
+        text-align: center;
+        color: #F7F7FF;
+        border: 3px white solid;
+    }
+}
+
+@media only screen and (max-width: 360px) {
+    .home-intro-text {
+        width: 200px;
+        height: 200px;
+        font-size: 0.5em;
+    }
+
+    #home-jumbo {
+        height: 110vh;
         width: auto;
         background-color: black;
         opacity: 0.9;

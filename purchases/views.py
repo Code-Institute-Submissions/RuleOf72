@@ -8,7 +8,9 @@ import stripe
 from lessons.models import Lesson, Sub_topic
 from forum.models import Forum_topic, Forum_comment
 from .models import Purchase
+from django.contrib.auth.decorators import login_required, permission_required
 
+@login_required
 def checkout(request, lesson_id):
     stripe.api_key = settings.STRIPE_SECRET_KEY
     current_site = Site.objects.get_current()
@@ -74,6 +76,7 @@ def payment_completed(request):
 
     return HttpResponse(status=200)
 
+@login_required
 def handle_payment(session):
     user = get_object_or_404(User, pk=session["client_reference_id"])
     metadata = json.loads(session['metadata']['data'])
