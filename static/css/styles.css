@@ -170,6 +170,20 @@ h1 {
     line-height: 3em;
 }
 
+/* sign up page */
+
+.sup-style {
+    background-color:black;
+    height: 80vh;
+    width: 50vw;
+    opacity: 0.9;
+    margin-top: 5%;
+    padding: 5% 5% 5% 10%;
+    color: white;
+    border: 3px white solid;
+    line-height: 3em;
+}
+
 /* all lessons page */
 
 #all-lessons-container {
