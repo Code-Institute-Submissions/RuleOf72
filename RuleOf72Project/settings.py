@@ -29,7 +29,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["ruleof72zx.herokuapp.com", "*"]
 
 # Application definition
 
@@ -186,3 +186,4 @@ CLOUDINARY = {
     'api_secret': os.environ.get('CLOUDINARY_API_SECRET'),
 }
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
