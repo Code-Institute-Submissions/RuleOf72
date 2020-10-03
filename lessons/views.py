@@ -62,7 +62,7 @@ def update_lesson(request, lesson_id):
             lesson_form = Lessons_form(request.POST, instance=lesson_being_updated)
             if lesson_form.is_valid():
                 lesson_form.save()
-                return redirect(reverse(all_lessons))
+                return redirect(reverse(created_lessons))
             else:
                 return render(request, 'lessons/update_lessons.template.html', {
                     "form": lesson_form,
