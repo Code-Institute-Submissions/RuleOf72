@@ -10,16 +10,19 @@
     {% if lesson.sub_topic_set.all %}
         {% for r in lesson.sub_topic_set.all %}
         <div class="card">
+            <iframe src="{{r.vid}}" frameborder="0" allowfullscreen height="200" width="300"></iframe>
             <h3>{{r.title}}</h3>
             {{r.content}}
-            {% if request.user == r.teacher %}
-            <a href="{% url 'update_sub_topic_route' sub_topic_id=r.id lesson_id=lesson.id %}">Edit topic</a>
-            <a href="{% url 'delete_sub_topic_route' sub_topic_id=r.id lesson_id=lesson.id %}">Delete topic</a>
+            {% if request.user == r.lesson.teacher %}
+            <a class="btn create-btn" href="{% url 'update_sub_topic_route' sub_topic_id=r.id lesson_id=lesson.id %}">Edit</a>
+            <a class="btn create-btn" href="{% url 'delete_sub_topic_route' sub_topic_id=r.id lesson_id=lesson.id %}">Delete</a>
             {%endif%}
         </div>
         {%endfor%}
-    {%else%}
+    {%elif request.user == lesson.teacher%}
         <h3 class="d-flex justify-content-center mt-5">There's nothing here. Please add a topic.</h3>
+    {%else%}
+        <h3 class="d-flex justify-content-center mt-5">The creator has not added in any lessons. Please check back at a later date.</h3>
     {%endif%}
 </div>
 {%endblock%}

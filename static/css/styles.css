@@ -189,6 +189,7 @@ h1 {
     background-color:black;
     height: 40vh;
     width: 30vw;
+    overflow: auto;
     opacity: 0.9;
     margin-top: 10%;
     padding: 5% 5% 5% 10%;
@@ -208,6 +209,7 @@ h1 {
     background-color:black;
     height: 60vh;
     width: 50vw;
+    overflow: auto;
     opacity: 0.9;
     margin-top: 10%;
     padding: 5% 5% 5% 10%;
@@ -222,6 +224,7 @@ h1 {
     background-color:black;
     height: 80vh;
     width: 50vw;
+    overflow: auto;
     opacity: 0.9;
     margin-top: 5%;
     padding: 5% 5% 5% 10%;

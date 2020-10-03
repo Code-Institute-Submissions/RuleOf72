@@ -120,6 +120,7 @@ def delete_lesson(request, lesson_id):
     else:
         return redirect(reverse(all_lessons))
 
+@login_required
 def specific_lesson(request, lesson_id):
     lesson_being_viewed = get_object_or_404(Lesson, pk=lesson_id)
     return render(request, 'lessons/specific_lessons.template.html', {
@@ -136,7 +137,7 @@ def add_sub_topic(request, lesson_id):
                 subtopic = form.save(commit=False)
                 subtopic.lesson = get_object_or_404(Lesson, pk=lesson_id)
                 subtopic.save()
-                return redirect(reverse('lessons/specific_lesson_route',
+                return redirect(reverse('specific_lesson_route',
                                         kwargs={
                                             'lesson_id': lesson_id
                                         }))
@@ -152,7 +153,7 @@ def add_sub_topic(request, lesson_id):
                 'lesson': lesson_being_viewed
             })
     else:
-        return redirect(reverse('lessons/specific_lesson_route',
+        return redirect(reverse('specific_lesson_route',
                                         kwargs={
                                             'lesson_id': lesson_id
                                         }))
@@ -167,7 +168,7 @@ def update_sub_topic(request, lesson_id, sub_topic_id):
         if request.method == "POST":
             if sub_topic_form.is_valid():
                 sub_topic_form.save()
-                return redirect(reverse('lessons/specific_lesson_route',
+                return redirect(reverse('specific_lesson_route',
                                         kwargs={
                                             'lesson_id': lesson_id
                                         }))
@@ -186,7 +187,7 @@ def update_sub_topic(request, lesson_id, sub_topic_id):
                 "lesson": lesson_being_viewed
             })
     else:
-        return redirect(reverse('lessons/specific_lesson_route',
+        return redirect(reverse('specific_lesson_route',
                                         kwargs={
                                             'lesson_id': lesson_id
                                         }))
@@ -209,7 +210,7 @@ def delete_sub_topic(request, lesson_id, sub_topic_id):
                 "lesson": lesson_being_viewed
             })
     else:
-        return redirect(reverse('lessons/specific_lesson_route',
+        return redirect(reverse('specific_lesson_route',
                                         kwargs={
                                             'lesson_id': lesson_id,
                                             'sub_topic_id': sub_topic_id
