@@ -203,5 +203,6 @@ def created_lessons(request):
 def purchased_lessons(request):
     lesson = Purchase.objects.filter(student=request.user)
     return render(request, "lessons/purchased_lessons.template.html", {
-        'lessons': lesson
+        'all_lessons': lesson
     })
+
