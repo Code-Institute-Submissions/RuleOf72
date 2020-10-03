@@ -12,11 +12,11 @@
         <div class="row row-cols-1 row-cols-lg-2 d-flex justify-content-center align-items-center mt-3 mb-3">
             <div class="card lesson-card" style="width: auto;">
                 <iframe src="{{r.video}}" frameborder="0" allowfullscreen height="auto" width="auto"></iframe>
-                <h3 class="card-text text-center">{{r.title}}</h3>
-                <p class="card-text text-center">{{r.content}}</p>
+                <h3 class="card-text text-center mt-2">{{r.title}}</h3>
+                <p class="card-text text-center mt-2">{{r.content}}</p>
                 {% if request.user == r.lesson.teacher %}
-                <a class="btn create-btn w-100" href="{% url 'update_sub_topic_route' sub_topic_id=r.id lesson_id=lesson.id %}">Edit</a>
-                <a class="btn create-btn w-100" href="{% url 'delete_sub_topic_route' sub_topic_id=r.id lesson_id=lesson.id %}">Delete</a>
+                    <a class="btn create-btn w-50" href="{% url 'update_sub_topic_route' sub_topic_id=r.id lesson_id=lesson.id %}">Edit</a>
+                    <a class="btn create-btn w-50" href="{% url 'delete_sub_topic_route' sub_topic_id=r.id lesson_id=lesson.id %}">Delete</a>
                 {%endif%}
             </div>
         </div>
