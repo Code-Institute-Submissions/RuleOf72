@@ -17,24 +17,13 @@
           <div class="card">
             <div class="card-header" id="intro_{{each_lesson.id}}">
               <h5 class="mb-0">
-                <button
-                  class="btn btn-link"
-                  data-toggle="collapse"
-                  data-target="#collapse_{{each_lesson.id}}"
-                  aria-expanded="false"
-                  aria-controls="collapse_{{each_lesson.id}}"
-                >
+                <button class="btn btn-link" data-toggle="collapse" data-target="#collapse_{{each_lesson.id}}" aria-expanded="false" aria-controls="collapse_{{each_lesson.id}}">
                   Introduction
                 </button>
               </h5>
             </div>
 
-            <div
-              id="collapse_{{each_lesson.id}}"
-              class="collapse show"
-              aria-labelledby="intro_{{each_lesson.id}}"
-              data-parent="#accordion_{{each_lesson.id}}"
-            >
+            <div id="collapse_{{each_lesson.id}}" class="collapse" aria-labelledby="intro_{{each_lesson.id}}" data-parent="#accordion_{{each_lesson.id}}">
               <div class="card-body">
                 <p class="card-text text-center">
                 About this Lesson: {{each_lesson.introduction}}
@@ -45,17 +34,9 @@
           <hr class="my-4" />
           <p class="card-text text-center">Price: ${{each_lesson.price}}</p>
           <hr class="my-4" />
-          <a
-            href="{% url 'specific_lesson_route' lesson_id=each_lesson.id %}"
-            class="btn create-btn"
-            >Details</a
-          >
+          <a href="{% url 'specific_lesson_route' lesson_id=each_lesson.id %}" class="btn create-btn">Details</a>
           {% if request.user != each_lesson.teacher %}
-          <a
-            href="{% url 'checkout_route' lesson_id=each_lesson.id %}"
-            class="btn btn-success"
-            >Buy now</a
-          >
+          <a href="{% url 'checkout_route' lesson_id=each_lesson.id %}" class="btn btn-success">Buy now</a>
           {%endif%}
         </div>
       </div>
