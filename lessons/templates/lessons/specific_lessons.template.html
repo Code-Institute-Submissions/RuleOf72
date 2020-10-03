@@ -10,8 +10,8 @@
     {% if lesson.sub_topic_set.all %}
         {% for r in lesson.sub_topic_set.all %}
         <div class="row row-cols-1 row-cols-lg-2 d-flex justify-content-center align-items-center mt-3 mb-3">
-            <div class="card lesson-card" style="width: 18rem;">
-                <iframe src="{{r.video}}" frameborder="0" allowfullscreen height="auto" width="18rem"></iframe>
+            <div class="card lesson-card" style="width: 300px;">
+                <iframe src="{{r.video}}" frameborder="0" allowfullscreen height="auto" width="300px"></iframe>
                 <h3 class="card-text text-center">{{r.title}}</h3>
                 <p class="card-text text-center">{{r.content}}</p>
                 {% if request.user == r.lesson.teacher %}
