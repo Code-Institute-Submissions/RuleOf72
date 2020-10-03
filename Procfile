@@ -1,0 +1,1 @@
+web: gunicorn RuleOf72Project.wsgi:application

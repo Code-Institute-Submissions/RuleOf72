@@ -10,7 +10,7 @@
     {% if lesson.sub_topic_set.all %}
         {% for r in lesson.sub_topic_set.all %}
         <div class="card">
-            <iframe src="{{r.vid}}" frameborder="0" allowfullscreen height="200" width="300"></iframe>
+            <iframe src="{{r.video}}" frameborder="0" allowfullscreen height="200" width="300"></iframe>
             <h3>{{r.title}}</h3>
             {{r.content}}
             {% if request.user == r.lesson.teacher %}

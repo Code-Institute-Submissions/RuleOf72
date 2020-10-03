@@ -18,7 +18,7 @@ class Lesson(models.Model):
 
 class Sub_topic(models.Model):
     title = models.CharField(blank=False, max_length=255)
-    vid = models.CharField(blank=True, max_length=255)
+    video = models.CharField(blank=True, max_length=255)
     content = models.TextField(blank=False)
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
 
