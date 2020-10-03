@@ -1,7 +1,9 @@
 {% extends 'base.template.html' %}
 
 {%block content%}
-<h1>Are you sure you want to delete the topic "{{sub_topic.title}}"?</h1>
+<div class="container" id="all-lessons-container">
+    <h1>Are you sure you want to delete the topic "{{sub_topic.title}}"?</h1>
+</div>
 <form method="POST">
     {% csrf_token %}
     <a href="{% url 'specific_lesson_route' lesson_id=lesson.id %}" class="btn btn-primary">No</a>
