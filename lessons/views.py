@@ -185,10 +185,11 @@ def delete_sub_topic(request, lesson_id, sub_topic_id):
             })
     else:
         return redirect(reverse('specific_lesson_route',
-                                        kwargs={
-                                            'lesson_id': lesson_id,
-                                            'sub_topic_id': sub_topic_id
-                                        }))
+                        kwargs={
+                            'lesson_id': lesson_id,
+                            'sub_topic_id': sub_topic_id
+                        }))
+
 
 @login_required
 def created_lessons(request):
@@ -196,6 +197,7 @@ def created_lessons(request):
     return render(request, "lessons/created_lessons.template.html", {
         'all_lessons': all_lessons
     })
+
 
 @login_required
 def purchased_lessons(request):
