@@ -19,8 +19,6 @@ def checkout(request, lesson_id):
     stripe_publishable_key = settings.STRIPE_PUBLISHABLE_KEY
     line_items = [{
             "name": lesson.topic,
-            # multiply the actual cost of the book to represent
-            # the cost in cents and must be in integer
             "amount": lesson.price,
             "quantity": 1,
             "currency": "usd"
