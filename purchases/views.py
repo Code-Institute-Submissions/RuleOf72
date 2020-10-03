@@ -5,10 +5,11 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 import json
 import stripe
-from lessons.models import Lesson, Sub_topic
-from forum.models import Forum_topic, Forum_comment
+from . import views
+from lessons.models import Lesson
 from .models import Purchase
-from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.decorators import login_required
+
 
 @login_required
 def checkout(request, lesson_id):
@@ -41,12 +42,17 @@ def checkout(request, lesson_id):
         'public_key': stripe_publishable_key,
     })
 
+
 def checkout_success(request):
-    return HttpResponse("Payment is successful")
+    lesson = Purchase.objects.filter(student=request.user)
+    return render(request, "lessons/purchased_lessons.template.html", {
+        'lessons': lesson
+    })
 
 
 def checkout_cancelled(request):
-    return HttpResponse("Payment cancelled")
+    return render(request, "lessons/all_lessons.template.html")
+
 
 @csrf_exempt
 def payment_completed(request):
@@ -74,7 +80,7 @@ def payment_completed(request):
 
     return HttpResponse(status=200)
 
-@login_required
+
 def handle_payment(session):
     user = get_object_or_404(User, pk=session["client_reference_id"])
     metadata = json.loads(session['metadata']['data'])
@@ -85,5 +91,3 @@ def handle_payment(session):
     purchase.student = user
     purchase.price = lesson.price
     purchase.save()
-
-
