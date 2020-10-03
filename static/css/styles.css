@@ -233,6 +233,20 @@ h1 {
     line-height: 3em;
 }
 
+/* email sent page */
+
+#email-sent {
+    background-color:black;
+    height: auto;
+    width: auto;
+    overflow: auto;
+    opacity: 0.9;
+    margin-top: 5%;
+    padding: 5% 5% 5% 10%;
+    color: white;
+    border: 3px white solid;
+}
+
 /* all lessons page */
 
 #all-lessons-container {
