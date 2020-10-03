@@ -9,7 +9,7 @@ from . import views
 from lessons.models import Lesson
 from .models import Purchase
 from django.contrib.auth.decorators import login_required
-
+endpoint_secret = "whsec_6VaMJhni7Zo52VBOcZRkmqwGXDMqQ09l"
 
 @login_required
 def checkout(request, lesson_id):
