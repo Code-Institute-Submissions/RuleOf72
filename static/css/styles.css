@@ -6,7 +6,6 @@ body{
     background-size: cover;
     background-repeat: no-repeat;
     background-position: fixed;
-    width: 100vw;
     min-height: 100vh;
 }
 
@@ -241,7 +240,7 @@ h1 {
 }
 
 .purchase-btn:hover{
-    background-color: #577399;
+    background-color: #ff8080;
     color: black;
     box-shadow: 0 0 6px 6px black;
 }

@@ -1,19 +1,25 @@
 {% extends 'base.template.html' %}
 
 {% block content %}
-<h1>{{lesson.topic}}</h1>
-{% if request.user == lesson.teacher %}
-<a href="{% url 'add_sub_topic_route' lesson_id=lesson.id %}">Add a topic</a>
-{%endif%}
-<a href="{% url 'show_forum_route' lesson_id=lesson.id%}">View Discussions</a>
-{% for r in lesson.sub_topic_set.all %}
-<div class="card">
-    <h3>{{r.title}}</h3>
-    {{r.content}}
-    {% if request.user == r.teacher %}
-    <a href="{% url 'update_sub_topic_route' sub_topic_id=r.id lesson_id=lesson.id %}">Edit topic</a>
-    <a href="{% url 'delete_sub_topic_route' sub_topic_id=r.id lesson_id=lesson.id %}">Delete topic</a>
+<div class="container" id="all-lessons-container">
+    <h1>{{lesson.topic}}</h1>
+    {% if request.user == lesson.teacher %}
+    <a class="btn create-btn w-100" href="{% url 'add_sub_topic_route' lesson_id=lesson.id %}">Add a topic</a>
+    {%endif%}
+    <a class="btn create-btn w-100" href="{% url 'show_forum_route' lesson_id=lesson.id%}">View Discussions</a>
+    {% if lesson.sub_topic_set.all %}
+        {% for r in lesson.sub_topic_set.all %}
+        <div class="card">
+            <h3>{{r.title}}</h3>
+            {{r.content}}
+            {% if request.user == r.teacher %}
+            <a href="{% url 'update_sub_topic_route' sub_topic_id=r.id lesson_id=lesson.id %}">Edit topic</a>
+            <a href="{% url 'delete_sub_topic_route' sub_topic_id=r.id lesson_id=lesson.id %}">Delete topic</a>
+            {%endif%}
+        </div>
+        {%endfor%}
+    {%else%}
+        <h3 class="d-flex justify-content-center mt-5">There's nothing here. Please add a topic.</h3>
     {%endif%}
 </div>
-{%endfor%}
 {%endblock%}
