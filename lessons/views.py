@@ -65,13 +65,15 @@ def update_lesson(request, lesson_id):
                 return redirect(reverse(all_lessons))
             else:
                 return render(request, 'lessons/update_lessons.template.html', {
-                    "form": lesson_form
+                    "form": lesson_form,
+                    "lesson": lesson_being_updated
                 })
         else:
             # 4. create a form with the book details filled in
             lesson_form = Lessons_form(instance=lesson_being_updated)
             return render(request, 'lessons/update_lessons.template.html', {
-                "form": lesson_form
+                "form": lesson_form,
+                "lesson": lesson_being_updated
             })
 
     else:
