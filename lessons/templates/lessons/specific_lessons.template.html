@@ -13,10 +13,11 @@
             <div class="card lesson-card" style="width: auto;">
                 <iframe src="{{r.video}}" frameborder="0" allowfullscreen height="auto" width="auto"></iframe>
                 <h3 class="card-text text-center mt-2">{{r.title}}</h3>
+                <hr class="my-4">
                 <p class="card-text text-center mt-2">{{r.content}}</p>
                 {% if request.user == r.lesson.teacher %}
-                    <a class="btn create-btn w-50" href="{% url 'update_sub_topic_route' sub_topic_id=r.id lesson_id=lesson.id %}">Edit</a>
-                    <a class="btn create-btn w-50" href="{% url 'delete_sub_topic_route' sub_topic_id=r.id lesson_id=lesson.id %}">Delete</a>
+                    <a class="btn edit-btn w-50" href="{% url 'update_sub_topic_route' sub_topic_id=r.id lesson_id=lesson.id %}">Edit</a>
+                    <a class="btn delete-btn w-50" href="{% url 'delete_sub_topic_route' sub_topic_id=r.id lesson_id=lesson.id %}">Delete</a>
                 {%endif%}
             </div>
         </div>

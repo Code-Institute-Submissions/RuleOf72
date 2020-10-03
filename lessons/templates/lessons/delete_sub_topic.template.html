@@ -3,10 +3,11 @@
 {%block content%}
 <div class="container" id="all-lessons-container">
     <h1>Are you sure you want to delete the topic "{{sub_topic.title}}"?</h1>
-</div>
-<form method="POST">
+    <form method="POST">
     {% csrf_token %}
-    <a href="{% url 'specific_lesson_route' lesson_id=lesson.id %}" class="btn btn-primary">No</a>
-    <input type="submit" class="btn btn-warning" value="Yes">
-<form>
+        <a href="{% url 'specific_lesson_route' lesson_id=lesson.id %}" class="btn create-btn">No</a>
+        <input type="submit" class="btn delete-btn" value="Yes">
+    </form>
+</div>
+
 {%endblock%}
