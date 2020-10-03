@@ -73,11 +73,12 @@ def update_lesson(request, lesson_id):
             return render(request, 'lessons/update_lessons.template.html', {
                 "form": lesson_form
             })
-    
+
     else:
         return redirect(reverse(all_lessons))
 
-@login_required    
+
+@login_required
 def delete_lesson(request, lesson_id):
     lesson_being_deleted = get_object_or_404(Lesson, pk=lesson_id)
     if request.user == lesson_being_deleted.teacher:
@@ -90,6 +91,7 @@ def delete_lesson(request, lesson_id):
             })
     else:
         return redirect(reverse(all_lessons))
+
 
 @login_required
 def specific_lesson(request, lesson_id):

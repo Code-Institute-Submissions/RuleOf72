@@ -36,9 +36,6 @@
             <p class="card-text text-center">Price: ${{each_lesson.price}}</p>
             <hr class="my-4" />
             <a href="{% url 'specific_lesson_route' lesson_id=each_lesson.id %}" class="btn create-btn">Details</a>
-            {% if request.user != each_lesson.teacher %}
-            <a href="{% url 'checkout_route' lesson_id=each_lesson.id %}" class="btn btn-success">Buy now</a>
-            {%endif%}
             </div>
         </div>
         </div>

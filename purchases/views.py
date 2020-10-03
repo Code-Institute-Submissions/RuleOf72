@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, HttpResponse, reverse
+from django.shortcuts import render, get_object_or_404, HttpResponse, reverse, redirect
 from django.conf import settings
 from django.contrib.sites.models import Site
 from django.views.decorators.csrf import csrf_exempt
@@ -51,7 +51,7 @@ def checkout_success(request):
 
 
 def checkout_cancelled(request):
-    return render(request, "lessons/all_lessons.template.html")
+    return redirect(reverse("all_lesson_route"))
 
 
 @csrf_exempt
