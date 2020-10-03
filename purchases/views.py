@@ -43,6 +43,7 @@ def checkout(request, lesson_id):
     })
 
 
+@login_required
 def checkout_success(request):
     lesson = Purchase.objects.filter(student=request.user)
     return render(request, "lessons/purchased_lessons.template.html", {
@@ -50,10 +51,12 @@ def checkout_success(request):
     })
 
 
+@login_required
 def checkout_cancelled(request):
     return redirect(reverse("all_lesson_route"))
 
 
+@login_required
 @csrf_exempt
 def payment_completed(request):
     # payload represents the data sent back to us by Stripe
@@ -81,6 +84,7 @@ def payment_completed(request):
     return HttpResponse(status=200)
 
 
+@login_required
 def handle_payment(session):
     user = get_object_or_404(User, pk=session["client_reference_id"])
     metadata = json.loads(session['metadata']['data'])
