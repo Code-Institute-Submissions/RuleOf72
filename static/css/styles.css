@@ -97,6 +97,52 @@ h1 {
   }
 }
 
+@media only screen and (max-width: 756px) {
+    .lout-style {
+        background-color:black;
+        height: auto !important;
+        width: 100% !important;
+        overflow: auto;
+        opacity: 0.9;
+        margin-top: 10%;
+        padding: 5% 5% 5% 10%;
+        color: white;
+        border: 3px white solid;
+        line-height: 3em;
+        text-decoration: none;
+    }
+
+    /* sign in page */
+
+    .lin-style {
+        background-color:black;
+        height: auto !important;
+        width: 100% !important;
+        overflow: auto;
+        opacity: 0.9;
+        margin-top: 10%;
+        padding: 5% 5% 5% 10%;
+        color: white;
+        border: 3px white solid;
+        line-height: 3em;
+    }
+
+    /* sign up page */
+
+    .sup-style {
+        background-color:black;
+        height: auto;
+        width: 100% !important;
+        overflow: auto;
+        opacity: 0.9;
+        margin-top: 5%;
+        padding: 5% 5% 5% 10%;
+        color: white;
+        border: 3px white solid;
+        line-height: 3em;
+    }
+}
+
 @media only screen and (max-width: 600px) {
     #home-jumbo {
         height: 80vh;
