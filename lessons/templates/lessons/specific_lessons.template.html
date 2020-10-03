@@ -9,14 +9,16 @@
     <a class="btn create-btn w-100" href="{% url 'show_forum_route' lesson_id=lesson.id%}">View Discussions</a>
     {% if lesson.sub_topic_set.all %}
         {% for r in lesson.sub_topic_set.all %}
-        <div class="card lesson-card" style="width: 18rem;">
-            <iframe src="{{r.video}}" frameborder="0" allowfullscreen height="200" width="300"></iframe>
-            <h3 class="card-text text-center">{{r.title}}</h3>
-            <p class="card-text text-center">{{r.content}}</p>
-            {% if request.user == r.lesson.teacher %}
-            <a class="btn create-btn" href="{% url 'update_sub_topic_route' sub_topic_id=r.id lesson_id=lesson.id %}">Edit</a>
-            <a class="btn create-btn" href="{% url 'delete_sub_topic_route' sub_topic_id=r.id lesson_id=lesson.id %}">Delete</a>
-            {%endif%}
+        <div class="row row-cols-1 row-cols-lg-2 d-flex justify-content-center align-items-center mt-3 mb-3">
+            <div class="card lesson-card" style="width: 18rem;">
+                <iframe src="{{r.video}}" frameborder="0" allowfullscreen height="auto" width="18rem"></iframe>
+                <h3 class="card-text text-center">{{r.title}}</h3>
+                <p class="card-text text-center">{{r.content}}</p>
+                {% if request.user == r.lesson.teacher %}
+                <a class="btn create-btn" href="{% url 'update_sub_topic_route' sub_topic_id=r.id lesson_id=lesson.id %}">Edit</a>
+                <a class="btn create-btn" href="{% url 'delete_sub_topic_route' sub_topic_id=r.id lesson_id=lesson.id %}">Delete</a>
+                {%endif%}
+            </div>
         </div>
         {%endfor%}
     {%elif request.user == lesson.teacher%}
