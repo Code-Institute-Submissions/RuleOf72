@@ -7,7 +7,7 @@
     <form method="POST" action="{% url 'add_sub_topic_route' lesson_id=lesson.id %}">
     {% csrf_token %}
     {{ form|crispy}}
-    <input type="submit"/>
+    <input class="btn create-btn" type="submit"/>
     </form>
 </div>
 

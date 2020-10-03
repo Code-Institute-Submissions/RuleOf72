@@ -1,14 +1,53 @@
 {% extends 'base.template.html' %}
 {% load crispy_forms_tags %}
-{%block content%}
-
-<h1>Edit {{sub_topic.title}}</h1>
-<form method="POST" action="{% url 'update_sub_topic_route' sub_topic_id=sub_topic.id lesson_id=lesson.id %}">
-{% csrf_token %}
-{{ form|crispy}}
-<input type="submit"/>
-</form>
-
-
+{% load cloudinary %}
+{% load static %}
+{%block content %}
+<div class="container" id="all-lessons-container">
+    <h1>Edit {{sub_topic.title}}</h1>
+    <form method="POST" action="{% url 'update_sub_topic_route' sub_topic_id=sub_topic.id lesson_id=lesson.id %}" enctype="multipart/form-data" id="form">
+        {%csrf_token%}
+        {{form|crispy}}
+        <input class="btn create-btn" type="submit"/>
+    </form>
+</div>
 
 {%endblock%}
+
+{% block js %}
+{% cloudinary_includes %}
+{% cloudinary_js_config %}
+<script>
+  function prettydump(obj) {
+    ret = ""
+    $.each(obj, function(key, value) {
+      ret += "<tr><td>" + key + "</td><td>" + value + "</td></tr>";
+    });
+    return ret;
+  }
+  $(function () {
+    $('#form input[type="file"]')
+    .cloudinary_fileupload({
+      dropZone: '#form',
+      start: function () {
+        $('.status_value').text('Starting direct upload...');
+      },
+      progress: function () {
+        $('.status_value').text('Uploading...');
+      },
+    })
+    .on('cloudinarydone', function (e, data) {
+        $('.status_value').text('Updating backend...');
+        var info = $('<div class="uploaded_info"/>');
+        $(info).append($('<div class="data"/>').append(prettydump(data.result)));
+        $(info).append($('<div class="image"/>').append(
+           $.cloudinary.image(data.result.public_id, {
+           format: data.result.format, width: 150, height: 150, crop: "fill"
+           })
+        ));
+        $('.uploaded_info_holder').append(info);
+        $('#form  input[type="file"]').parent().parent().remove();
+    });
+  });
+</script>
+{% endblock %}

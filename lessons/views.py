@@ -176,8 +176,7 @@ def delete_sub_topic(request, lesson_id, sub_topic_id):
             topic_being_deleted.delete()
             return redirect(reverse('specific_lesson_route',
                                         kwargs={
-                                            'lesson_id': lesson_id,
-                                            'sub_topic_id': sub_topic_id
+                                            'lesson_id': lesson_id
                                         }))
         else:
             return render(request, 'lessons/delete_sub_topic.template.html', {
