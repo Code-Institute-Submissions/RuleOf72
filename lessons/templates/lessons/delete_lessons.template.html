@@ -1,10 +1,12 @@
 {% extends 'base.template.html' %}
 
 {%block content%}
-<h1>Are you sure you want to delete the lesson "{{lesson.topic}}"?</h1>
-<form method="POST">
-    {% csrf_token %}
-    <a href="{% url 'all_lesson_route' %}" class="btn btn-primary">No</a>
-    <input type="submit" class="btn btn-warning" value="Yes">
-<form>
+<div class="container" id="all-lessons-container">
+    <h1>Are you sure you want to delete the lesson "{{lesson.topic}}"?</h1>
+</div>
+    <form method="POST">
+        {% csrf_token %}
+        <a href="{% url 'all_lesson_route' %}" class="btn details-btn">No</a>
+        <input type="submit" class="btn details-btn" value="Yes">
+    <form>
 {%endblock%}

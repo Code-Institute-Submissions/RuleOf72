@@ -3,12 +3,14 @@
 
 
 {% block content %}
-<h1>Update a lesson</h1>
+<div class="container" id="all-lessons-container">
+    <h1>Update a lesson</h1>
 
-<form method="POST">
-    {% csrf_token %}
-    {{form|crispy}}
-    <input type="submit"/>
-</form>
+    <form method="POST">
+        {% csrf_token %}
+        {{form|crispy}}
+        <input type="submit"/>
+    </form>
+</div>
 
 {%endblock%}
