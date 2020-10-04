@@ -9,28 +9,15 @@ body{
     min-height: 100vh;
 }
 
+#navbar-logo {
+    height: 50px;
+    width: auto;
+}
+
 h1 {
     color:#BDD5EA;
     font-weight: bolder;
 }
-
-/* .main-bg {
-    position: relative;
-    height: 150vh;
-    width: 100vw;
-}
-
-.main-bg::before{
-    content: "";
-    background-image: url("/static/72bg.jpg");
-    background-size: cover;
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    bottom: 0px;
-    left: 0px;
-    opacity: 0.5;
-} */
 
 #home-jumbo{
     height: 60vh;
