@@ -5,7 +5,7 @@
 {% endblock%}
 {% block content %}
 <div class="container mt-5 mb-5" id="all-lessons-container">
-    <h1>Comment on: </h1><h3>{{topic.title}}?</h3>
+    <h1>Comment on: </h1><h3>{{topic.title}}</h3>
     <form method="POST" action="{% url 'create_comment_route' lesson_id=lesson.id topic_id=topic.id %}">
         {% csrf_token %}
         {{form|crispy}}

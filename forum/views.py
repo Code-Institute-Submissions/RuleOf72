@@ -92,6 +92,7 @@ def update_forum(request, lesson_id, topic_id):
                                             'lesson_id': lesson_id
                                         }))
 
+
 @login_required    
 def delete_forum(request, lesson_id, topic_id):
     forum_being_deleted = get_object_or_404(Forum_topic, pk=topic_id)
@@ -112,6 +113,7 @@ def delete_forum(request, lesson_id, topic_id):
                                             'lesson_id': lesson_id
                                         }))
 
+
 @login_required
 def show_specific_topic(request, topic_id, lesson_id):
     lesson_being_viewed = get_object_or_404(Lesson, pk=lesson_id)
@@ -120,6 +122,7 @@ def show_specific_topic(request, topic_id, lesson_id):
         'discussion': topic_being_viewed,
         'lesson': lesson_being_viewed,
         })
+
 
 @login_required
 def create_comment(request, lesson_id, topic_id):
