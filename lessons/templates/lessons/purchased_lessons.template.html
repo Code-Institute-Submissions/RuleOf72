@@ -12,34 +12,34 @@
     {% for each_lesson in all_lessons %}
     <div class="row row-cols-1 row-cols-lg-2 d-flex justify-content-center align-items-center mt-3">
         <div class="card lesson-card" style="width: 18rem;">
-        {% cloudinary each_lesson.picture class="card-img-top" %}
+        {% cloudinary each_lesson.lesson_purchased.picture class="card-img-top" %}
         <div class="card-body">
             <h5 class="card-title text-center font-weight-bold">
-            {{each_lesson.topic}}
+            {{each_lesson.lesson_purchased.topic}}
             </h5>
             <hr class="my-4" />
-            <div id="accordion_{{each_lesson.id}}">
+            <div id="accordion_{{each_lesson.lesson_purchased.id}}">
             <div class="card">
-                <div class="card-header" id="intro_{{each_lesson.id}}">
+                <div class="card-header" id="intro_{{each_lesson.lesson_purchased.id}}">
                 <h5 class="mb-0">
-                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapse_{{each_lesson.id}}" aria-expanded="false" aria-controls="collapse_{{each_lesson.id}}">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapse_{{each_lesson.id}}" aria-expanded="false" aria-controls="collapse_{{each_lesson.lesson_purchased.id}}">
                     Introduction
                     </button>
                 </h5>
                 </div>
 
-                <div id="collapse_{{each_lesson.id}}" class="collapse" aria-labelledby="intro_{{each_lesson.id}}" data-parent="#accordion_{{each_lesson.id}}">
+                <div id="collapse_{{each_lesson.lesson_purchased.id}}" class="collapse" aria-labelledby="intro_{{each_lesson.lesson_purchased.id}}" data-parent="#accordion_{{each_lesson.lesson_purchased.id}}">
                 <div class="card-body">
                     <p class="card-text text-center">
-                    About this Lesson: {{each_lesson.introduction}}
+                    About this Lesson: {{each_lesson.lesson_purchased.introduction}}
                     </p>
                 </div>
                 </div>
             </div>
             <hr class="my-4" />
-            <p class="card-text text-center">Price: ${{each_lesson.price}}</p>
+            <p class="card-text text-center">Price: ${{each_lesson.lesson_purchased.price}}</p>
             <hr class="my-4" />
-            <a href="{% url 'specific_lesson_route' lesson_id=each_lesson.id %}" class="btn create-btn">Details</a>
+            <a href="{% url 'specific_lesson_route' lesson_id=each_lesson.lesson_purchased.id %}" class="btn create-btn">Details</a>
             </div>
         </div>
         </div>
