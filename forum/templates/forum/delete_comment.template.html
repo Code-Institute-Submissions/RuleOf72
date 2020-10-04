@@ -1,5 +1,7 @@
 {% extends 'base.template.html' %}
-
+{% block title %}
+    Delete comment for: {{comment.title}}
+{% endblock%}
 {%block content%}
 <h1>Are you sure you want to delete the comment: "{{comment.title}}"?</h1>
 <form method="POST" action="{% url 'delete_comment_route' lesson_id=lesson.id topic_id=discussion.id comment_id=comment.id %}">

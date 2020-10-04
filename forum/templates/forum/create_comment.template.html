@@ -1,7 +1,8 @@
 {% extends 'base.template.html' %}
 {% load crispy_forms_tags %}
-
-
+{% block title %}
+    Create comment for: {{topic.title}}
+{% endblock%}
 {% block content %}
 <h1>Comment on "{{topic.title}}"</h1>
 

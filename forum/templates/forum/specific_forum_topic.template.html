@@ -1,5 +1,7 @@
 {% extends 'base.template.html' %}
-
+{% block title %}
+    {{lesson.topic}}'s discussion: {{discussion.title}}
+{% endblock%}
 {% block content %}
 <h1>{{lesson.topic}}'s discussion: {{discussion.title}}</h1>
 <a href="{% url 'create_comment_route' lesson_id=lesson.id topic_id=discussion.id %}">Comment on this discussion!</a>
