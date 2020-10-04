@@ -19,6 +19,9 @@ def checkout(request, lesson_id):
     domain = current_site.domain
     lesson = get_object_or_404(Lesson, pk=lesson_id)
     stripe_publishable_key = settings.STRIPE_PUBLISHABLE_KEY
+    lesson_id = [{
+        'lesson_id': lesson.id
+    }]
     line_items = [{
             "name": lesson.topic,
             "amount": int(lesson.price)*100,
@@ -33,9 +36,7 @@ def checkout(request, lesson_id):
                 success_url=domain + reverse('checkout_success_route'),
                 cancel_url=domain + reverse('checkout_cancelled_route'),
                 metadata={
-                    "data": json.dumps({
-                        'lesson_id': lesson.id
-                    })
+                    "data": json.dumps(lesson_id)
                 }
             )
     return render(request, 'purchases/checkout.template.html', {
