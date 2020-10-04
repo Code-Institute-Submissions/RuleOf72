@@ -20,7 +20,7 @@ def checkout(request, lesson_id):
     stripe_publishable_key = settings.STRIPE_PUBLISHABLE_KEY
     line_items = [{
             "name": lesson.topic,
-            "amount": int(lesson.price)*100,
+            "amount": int(lesson.price * 100),
             "quantity": 1,
             "currency": "usd"
         }]
