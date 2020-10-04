@@ -113,6 +113,10 @@ The logo used is 72/? because the rule of 72 is a known equation that helps to c
 ER diagram can be found [here](https://github.com/liuzhenxin2/RuleOf72/blob/master/ERD72.png)
 Logic Schema can be found [here](https://github.com/liuzhenxin2/RuleOf72/blob/master/LogicS72.png)
 
+# Bugs
+
+### Stripe webhooks not working.
+
 # Testing
 
 A detailed testing file can be found [here](https://github.com/liuzhenxin2/RuleOf72/blob/master/ruleof72%20test.pdf)
