@@ -10,7 +10,6 @@ from . import views
 from lessons.models import Lesson
 from .models import Purchase
 from django.contrib.auth.decorators import login_required
-endpoint_secret = "whsec_usUfS52QhkWB8Ch8460YookJGDkg62Fx"
 
 
 @login_required
