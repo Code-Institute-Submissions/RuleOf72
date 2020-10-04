@@ -2,7 +2,7 @@ from django.shortcuts import (render, HttpResponse, get_object_or_404,
                               redirect, reverse)
 from .forms import Lessons_form, Subtopics_form, SearchForm
 from .models import Lesson, Sub_topic
-from checkout.models import Purchase
+from purchases.models import Purchase
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib import messages
 from django.contrib.auth.models import User

@@ -5,7 +5,7 @@ from django.contrib.sites.models import Site
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from lessons.models import Lesson
-from checkout.models import Purchase
+from purchases.models import Purchase
 from django.contrib.auth.decorators import login_required
 import json
 import stripe
@@ -37,7 +37,7 @@ def checkout(request, lesson_id):
                     })
                 }
             )
-    return render(request, 'checkout/checkout.template.html', {
+    return render(request, 'purchases/checkout.template.html', {
         'session_id': session.id,
         'public_key': stripe_publishable_key,
     })
