@@ -86,6 +86,7 @@ def payment_completed(request):
 def handle_payment(session):
     user = get_object_or_404(User, pk=session["client_reference_id"])
     metadata = json.loads(session['metadata']['data'])
+    print(metadata)
     lesson = get_object_or_404(Lesson, pk=metadata['lesson_id'])
     purchase = Purchase()
     purchase.lesson_purchased = lesson
