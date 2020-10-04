@@ -26,7 +26,7 @@ def checkout(request, lesson_id):
             "name": lesson.topic,
             "amount": int(lesson.price)*100,
             "quantity": 1,
-            "currency": "sgd"
+            "currency": "usd"
         }]
     session = stripe.checkout.Session.create(
                 payment_method_types=['card'],
