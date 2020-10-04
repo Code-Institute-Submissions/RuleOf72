@@ -19,6 +19,7 @@ from . import settings
 from django.contrib.staticfiles.urls import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('lessons/', include('lessons.urls')),
@@ -27,4 +28,3 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('purchases/', include('purchases.urls')),
 ]
-
