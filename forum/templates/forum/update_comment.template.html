@@ -5,7 +5,7 @@
 {% endblock%}
 {% block content %}
 <div class="container mt-5 mb-5" id="all-lessons-container">
-    <h1>Update: {{comment.title}}</h1><h3>{{comment.title}}</h3>
+    <h1>Update: {{comment.title}}</h1>
 
     <form method="POST" action="{% url 'update_comment_route' lesson_id=lesson.id topic_id=discussion.id comment_id=comment.id %}">
         {% csrf_token %}
