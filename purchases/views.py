@@ -53,6 +53,7 @@ def checkout_success(request):
 def checkout_cancelled(request):
     return redirect(reverse("all_lesson_route"))
 
+
 @login_required
 @csrf_exempt
 def payment_completed(request):
