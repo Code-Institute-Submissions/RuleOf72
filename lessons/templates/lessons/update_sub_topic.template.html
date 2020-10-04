@@ -2,6 +2,9 @@
 {% load crispy_forms_tags %}
 {% load cloudinary %}
 {% load static %}
+{% block title %}
+    Update topic: {{sub_topic.title}}
+{% endblock%}
 {%block content %}
 <div class="container mt-5 mb-5" id="all-lessons-container">
     <h1>Edit {{sub_topic.title}}</h1>

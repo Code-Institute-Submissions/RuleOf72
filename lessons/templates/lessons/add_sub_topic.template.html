@@ -1,5 +1,8 @@
 {% extends 'base.template.html' %}
 {% load crispy_forms_tags %}
+{% block title %}
+    Add topic for: {{lesson.topic}}
+{% endblock%}
 {%block content%}
 <div class="container mt-5 mb-5" id="all-lessons-container">
     <h1>Add a topic to {{lesson.topic}}</h1>

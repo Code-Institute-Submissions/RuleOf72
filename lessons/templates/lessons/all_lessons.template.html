@@ -1,6 +1,9 @@
 {% extends 'base.template.html' %} 
 {% load crispy_forms_tags %} 
-{% load cloudinary %} 
+{% load cloudinary %}
+{% block title %}
+    All Lessons
+{% endblock%} 
 {% block content %}
 <div class="container mt-5 mb-5" id="all-lessons-container">
   <h1>Search for a lesson</h1>
