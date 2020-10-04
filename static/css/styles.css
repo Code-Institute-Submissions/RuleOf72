@@ -240,10 +240,12 @@ h1 {
     background-color:black;
     min-height: 100vh;
     width: 80vw;
+    overflow: auto;
     opacity: 0.9;
     padding: 5% 5% 5% 5%;
     line-height: 3em;
     color: white;
+    border: 3px solid white;
 }
 
 .create-btn {

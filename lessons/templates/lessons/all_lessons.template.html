@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %} 
 {% load cloudinary %} 
 {% block content %}
-<div class="container mt-5" id="all-lessons-container">
+<div class="container mt-5 mb-5" id="all-lessons-container">
   <h1>Search for a lesson</h1>
   <form method="GET">
     {{search_form|crispy}}
@@ -34,7 +34,7 @@
             <div id="collapse_{{each_lesson.id}}" class="collapse" aria-labelledby="intro_{{each_lesson.id}}" data-parent="#accordion_{{each_lesson.id}}">
               <div class="card-body">
                 <p class="card-text text-center">
-                About this Lesson: {{each_lesson.introduction}}
+                <b>About this Lesson:</b> {{each_lesson.introduction}}
                 </p>
               </div>
             </div>

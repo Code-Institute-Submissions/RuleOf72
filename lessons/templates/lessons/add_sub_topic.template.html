@@ -1,7 +1,7 @@
 {% extends 'base.template.html' %}
 {% load crispy_forms_tags %}
 {%block content%}
-<div class="container mt-5" id="all-lessons-container">
+<div class="container mt-5 mb-5" id="all-lessons-container">
     <h1>Add a topic to {{lesson.topic}}</h1>
 
     <form method="POST" action="{% url 'add_sub_topic_route' lesson_id=lesson.id %}">

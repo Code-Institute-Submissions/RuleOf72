@@ -3,7 +3,7 @@
 {% load cloudinary %}
 {% load static %}
 {%block content %}
-<div class="container" id="all-lessons-container">
+<div class="container mt-5 mb-5" id="all-lessons-container">
     <h1>Edit {{sub_topic.title}}</h1>
     <form method="POST" action="{% url 'update_sub_topic_route' sub_topic_id=sub_topic.id lesson_id=lesson.id %}" enctype="multipart/form-data" id="form">
         {%csrf_token%}

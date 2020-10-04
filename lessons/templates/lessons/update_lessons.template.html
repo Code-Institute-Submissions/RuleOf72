@@ -3,7 +3,7 @@
 {% load cloudinary %}
 {% load static %}
 {%block content %}
-<div class="container" id="all-lessons-container">
+<div class="container mt-5 mb-5" id="all-lessons-container">
     <h1>Update: {{lesson.topic}}</h1>
     <form method="POST" enctype="multipart/form-data" id="form">
         {%csrf_token%}

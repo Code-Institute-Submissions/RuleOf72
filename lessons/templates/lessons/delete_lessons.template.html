@@ -1,7 +1,7 @@
 {% extends 'base.template.html' %}
 
 {%block content%}
-<div class="container" id="all-lessons-container">
+<div class="container mt-5 mb-5" id="all-lessons-container">
     <h1>Are you sure you want to delete the lesson "{{lesson.topic}}"?</h1>
     <form method="POST">
         {% csrf_token %}

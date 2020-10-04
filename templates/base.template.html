@@ -21,28 +21,28 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'home_route' %}">Home</a>
+                    <a class="nav-link" href="{% url 'home_route' %}"><b>Home</b></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'all_lesson_route' %}">Lessons</a>
+                    <a class="nav-link" href="{% url 'all_lesson_route' %}"><b>Lessons</b></a>
                 </li>
                 {% if request.user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'purchased_lesson_route' %}">Purchased Lessons</a>
+                    <a class="nav-link" href="{% url 'purchased_lesson_route' %}"><b>Purchased Lessons</b></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'created_lesson_route' %}">Created Lessons</a>
+                    <a class="nav-link" href="{% url 'created_lesson_route' %}"><b>Created Lessons</b></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
+                    <a class="nav-link" href="{% url 'account_logout' %}"><b>Logout</b></a>
                 </li>
                 {%endif%}
                 {% if not request.user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'account_login' %}">Login</a>
+                    <a class="nav-link" href="{% url 'account_login' %}"><b>Login</b></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'account_signup' %}">Register</a>
+                    <a class="nav-link" href="{% url 'account_signup' %}"><b>Register</b></a>
                 </li>
                 {%endif%}
             </ul>

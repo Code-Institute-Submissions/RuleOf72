@@ -1,7 +1,7 @@
 {% extends 'base.template.html' %}
 
 {% block content %}
-<div class="container" id="all-lessons-container">
+<div class="container mt-5 mb-5" id="all-lessons-container">
     <h1>{{lesson.topic}}</h1>
     {% if request.user == lesson.teacher %}
     <a class="btn create-btn w-100" href="{% url 'add_sub_topic_route' lesson_id=lesson.id %}">Add a topic</a>
