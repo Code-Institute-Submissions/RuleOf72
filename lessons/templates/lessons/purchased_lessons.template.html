@@ -7,9 +7,8 @@
 {% block content %}
 <div class="container mt-5 mb-5" id="all-lessons-container">
     <h1>My Purchased Lessons</h1>
-    {{all_lessons.lesson_purchased.topic}}
-{% if all_lessons.lesson_purchased %}
-    {% for each_lesson in all_lessons.lesson_purchased %}
+{% if all_lessons %}
+    {% for each_lesson in all_lessons %}
     <div class="row row-cols-1 row-cols-lg-2 d-flex justify-content-center align-items-center mt-3">
         <div class="card lesson-card" style="width: 18rem;">
         {% cloudinary each_lesson.picture class="card-img-top" %}
