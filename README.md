@@ -1,39 +1,143 @@
-<img src="https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png" style="margin: 0;">
+# Welcome to RuleOf72
 
-Welcome liuzhenxin2,
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. You can safely delete this README.md file, or change it for your own project.
 
-## Gitpod Reminders
+# What is RuleOf72?
+RuleOf72 is a finance education website for anyone to create a topic that they are knowledgeable about. Users are also able to have discussions on any topic that they are enthusiatic about.
+Please visit the live site [here](https://ruleof72zx.herokuapp.com/) 
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+### For test users, please use the following account:
+- User: **customerb**
+- Password: **12345678!**
+### Image
+##### - This website uses Cloudinary for image uploading.
+### Video
+##### - To Embed a video for a topic, please go to youtube, select a video to embed, click on "Share" and copy the embeded link. This is due to the constrains of cloudinary as they have a set 100mb storage capability. 
+##### - For testing, please paste <https://www.youtube.com/embed/v6j8ewrcxd8> this link into the video field.
+##### - Lesson "stocks 202" has 3 sub topics.
 
-`python3 -m http.server`
 
-A blue button should appear to click: *Make Public*,
+# UI/UX
 
-Another blue button should appear to click: *Open Browser*.
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+## Strategy
+### Owner stories:
 
-A blue button should appear to click: *Make Public*,
+- As the owner, I want to build an ecosystem so that users can learn about any financial topic there is.
+- As the owner, I want to build up a reputation to be the website with the highest quantity and quality educational content pertaining finance.
+- As the owner, I want people to embrace finance and take control of their own finances as I believe the best investment anyone can make is their own education.
 
-Another blue button should appear to click: *Open Browser*.
+### User-Teacher:
 
-In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the backend lessons.
+- As the teacher of a financial topic, I want my students to have the best experience and useablity when it comes to UIUX as this will encourage my students to stay on the site longer.
+- As the teacher, I want to be able to present my knowledge in a structured manner so that students will no be overwhelmed by information.
+- As the teacher, I want to teach on a website that has alot of visitors as that will boost my earnings.
 
-## Updates Since The Instructional Video
+### User-Student:
 
-We continually tweak and adjust this template to help give you the best experience. Here are the updates since the original video was made:
+- As a student, I want to study on a website that is easy to use so that I can retain my attention span for a longer period of time.
+- As a student, I want to be on a website that provides a wide array of lessons to choose from.
+- As a student, I want to be able to engage in meaningful discussions after a topic so that I can retain the most information and also helps to cement my understanding on the topic.
 
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
 
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
+## Scope
 
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
+### Current Features
 
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
+#### Accounts:
+- Register
+- Login
+- Logout
+#### Lessons:
+- Create Lessons
+- Update Lessons
+- Delete Lessons
+- View all created Lessons
+- View all purchased Lessons
+- Search for a Lesson by title
+- Create sub topics
+- Update sub topics
+- Delete sub topics
+#### Forum:
+- Create a discussion
+- Update a discussion
+- Delete a discussion
+- Search for a discussion by title
+- Create a comment
+- Update a comment
+- Delete a comment
 
---------
+### Features to be implemented
 
-Happy coding!
+- Login/Register with social media sites
+- Filter search results and sort by price or date listed
+- Wishlist for users to add in sortlisted listings
+- Annotations of video lectures 
+- Sending confirmation emails
+- Voting system for Lessons and Forum comments
+
+## Skeleton
+
+Wireframes can be found [here](https://github.com/liuzhenxin2/RuleOf72/tree/master/wireframes)
+
+## Surface
+
+As this is a finance related website, I chose darker colors to represent professionalism and I chose a lighter shade of blue to give users a slightly casual and less pressured feeling. There is no fancy font as I want to present a readable website.
+The logo used is 72/? because the rule of 72 is a known equation that helps to calculate the number of years required to double your investment. So for example, if your returns is 6%, 72/6 would be 12. Which means that it would take you 12 years to double your investment.
+
+# Technologies used
+
+- HTML
+- CSS
+- Javascript
+- [JQuery](https://jquery.com/) to simplify DOM manipulation
+- [Bootstrap version 4.5](https://getbootstrap.com/docs/4.5/getting-started/introduction/) for flex boxes, color schemes and navbar
+- [GitHub](https://github.com/) for version control
+- [Jinja2](https://jinja.palletsprojects.com/en/2.11.x/) for template displaying
+- [django-crispy-forms](https://django-crispy-forms.readthedocs.io/en/latest/) for more aesthetically pleasing forms
+- [Stripe](https://stripe.com/en-sg) for payment handling
+- [Heroku](https://dashboard.heroku.com/apps) for website hosting
+- [Cloudinary](https://cloudinary.com/) for image uploading
+- [Django](https://www.djangoproject.com/) for the key essential features such as routing, validation of forms and implementing key functions of the webpage.
+- [Django-allauth](https://django-allauth.readthedocs.io/en/latest/installation.html) to provide basic security and privacy features and to enable an account login system.
+- [Python-dotenv](https://pypi.org/project/python-dotenv/) to prevents senstive information from being uploaded to github
+- [SQLite3](https://www.sqlite.org/index.html) for test development
+- [dj_database_url](https://pypi.org/project/dj-database-url/) for heroku development and deployment
+
+
+# Database design
+
+ER diagram can be found [here](https://github.com/liuzhenxin2/RuleOf72/blob/master/ERD72.png)
+Logic Schema can be found [here](https://github.com/liuzhenxin2/RuleOf72/blob/master/LogicS72.png)
+
+# Testing
+
+A detailed testing file can be found [here](https://github.com/liuzhenxin2/RuleOf72/blob/master/ruleof72%20test.pdf)
+
+# Deployment
+
+#### This website is deployed on Heroku. The URL for the deployed website is https://ruleof72zx.herokuapp.com/
+
+#### To deploy on Heroku:
+
+1. Download or Clone the master branch from github
+2. To list all the requirements in requirements.txt, run the following command in terminal:
+```pip3 freeze --local > requirements.txt```
+3. Set Debug to False in settings.py of main project app.
+4. Procfile need to be created to run gunicorn upon deployment
+5. Git push to Heroku Master after all the documents are properly set up
+6. All public keys and private keys for the following need to be added to in Heroku Config Vars settings:
+- Cloudinary API key
+- Cloudinary API Secret
+- Cloudinary Cloud Name
+- Database URL
+- Stripe Endpoint Secret
+- Stripe Publishable Key
+- Stripe Secret Key
+- Secret Key
+# Credits
+
+- Google and Unsplash for images
+- [LogoMakr](https://logomakr.com/) for logo
+- [Favicon.io](https://favicon.io/) for favicon conversion
+
