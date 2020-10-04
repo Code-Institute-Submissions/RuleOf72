@@ -8,7 +8,7 @@ from cloudinary.models import CloudinaryField
 class Lesson(models.Model):
     date_created = models.DateTimeField(auto_now_add=True, blank=True)
     topic = models.CharField(blank=False, max_length=255)
-    price = models.IntegerField(blank=False, default=0)
+    price = models.PositiveIntegerField(blank=False, default=0)
     teacher = models.ForeignKey(User, on_delete=models.CASCADE)
     introduction = models.TextField(blank=True)
     picture = CloudinaryField()

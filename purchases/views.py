@@ -20,9 +20,9 @@ def checkout(request, lesson_id):
     stripe_publishable_key = settings.STRIPE_PUBLISHABLE_KEY
     line_items = [{
             "name": lesson.topic,
-            "amount": lesson.price,
+            "amount": int(lesson.price)*100,
             "quantity": 1,
-            "currency": "usd"
+            "currency": "sgd"
         }]
     session = stripe.checkout.Session.create(
                 payment_method_types=['card'],
