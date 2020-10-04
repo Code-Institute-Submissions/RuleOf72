@@ -41,7 +41,7 @@ def create_forum(request, lesson_id):
             forum.lesson_commented = lesson_being_viewed
             forum.save()
             messages.success(request, f"New Forum Topic {form.cleaned_data['title']} has been created")
-            return redirect(reverse('forum/show_forum_route', kwargs={
+            return redirect(reverse('show_forum_route', kwargs={
                                         'lesson_id': lesson_id
                                     }))
         else:

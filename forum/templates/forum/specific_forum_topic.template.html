@@ -3,16 +3,18 @@
     {{lesson.topic}}'s discussion: {{discussion.title}}
 {% endblock%}
 {% block content %}
-<h1>{{lesson.topic}}'s discussion: {{discussion.title}}</h1>
-<a href="{% url 'create_comment_route' lesson_id=lesson.id topic_id=discussion.id %}">Comment on this discussion!</a>
-{% for r in discussion.forum_comment_set.all %}
-<div class="card">
-    <h3>{{r.title}}</h3>
-    {{r.content}}
-    {% if request.user == r.commenter %}
-    <a href="{% url 'update_comment_route' lesson_id=lesson.id topic_id=discussion.id comment_id=r.id %}" class="btn btn-primary">Edit</a>
-    <a href="{% url 'delete_comment_route' lesson_id=lesson.id topic_id=discussion.id comment_id=r.id %}" class="btn btn-warning">delete</a> 
-    {%endif%}
+<div class="container mt-5 mb-5" id="all-lessons-container">
+    <h1>{{lesson.topic}}'s discussion:</h1><h3> {{discussion.title}}</h3>
+    <a href="{% url 'create_comment_route' lesson_id=lesson.id topic_id=discussion.id %}">Comment on this discussion!</a>
+    {% for r in discussion.forum_comment_set.all %}
+    <div class="card">
+        <h3>{{r.title}}</h3>
+        {{r.content}}
+        {% if request.user == r.commenter %}
+        <a href="{% url 'update_comment_route' lesson_id=lesson.id topic_id=discussion.id comment_id=r.id %}" class="btn create-btn">Edit</a>
+        <a href="{% url 'delete_comment_route' lesson_id=lesson.id topic_id=discussion.id comment_id=r.id %}" class="btn delete-btn">delete</a> 
+        {%endif%}
+    </div>
 </div>
 {%endfor%}
 {%endblock%}

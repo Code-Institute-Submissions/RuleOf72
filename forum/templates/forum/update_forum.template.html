@@ -4,14 +4,15 @@
     Update: {{discussion.title}}
 {% endblock%}
 {% block content %}
-<h1>Update: {{discussion.title}}</h1>
+<div class="container mt-5 mb-5" id="all-lessons-container">
+    <h1>Update:</h1><h3> {{discussion.title}}</h3>
 
-<form method="POST" action="{% url 'update_forum_route' lesson_id=lesson.id topic_id=discussion.id %}">
-    {% csrf_token %}
-    {{form|crispy}}
-    <input type="submit"/>
-</form>
+    <form method="POST" action="{% url 'update_forum_route' lesson_id=lesson.id topic_id=discussion.id %}">
+        {% csrf_token %}
+        {{form|crispy}}
+        <input type="submit" class="btn create-btn"/>
+    </form>
 
-<a href="{% url 'show_forum_route' lesson_id=lesson.id %}" class="btn btn-primary">No</a>
-
+    <a href="{% url 'show_forum_route' lesson_id=lesson.id %}" class="btn create-btn">No</a>
+</div>
 {%endblock%}

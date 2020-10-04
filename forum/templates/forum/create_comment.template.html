@@ -4,14 +4,14 @@
     Create comment for: {{topic.title}}
 {% endblock%}
 {% block content %}
-<h1>Comment on "{{topic.title}}"</h1>
-
-<form method="POST" action="{% url 'create_comment_route' lesson_id=lesson.id topic_id=topic.id %}">
-    {% csrf_token %}
-    {{form|crispy}}
-    <input type="submit" value="Comment"/>
-</form>
-
-<a href="{% url 'specific_topic_route' lesson_id=lesson.id topic_id=topic.id %}" class="btn btn-primary">No</a>
+<div class="container mt-5 mb-5" id="all-lessons-container">
+    <h1>Comment on: </h1><h3>{{topic.title}}?</h3>
+    <form method="POST" action="{% url 'create_comment_route' lesson_id=lesson.id topic_id=topic.id %}">
+        {% csrf_token %}
+        {{form|crispy}}
+        <input type="submit" value="Comment" class="btn create-btn"/>
+    </form>
+    <a href="{% url 'specific_topic_route' lesson_id=lesson.id topic_id=topic.id %}" class="btn create-btn">No</a>
+</div>
 
 {%endblock%}

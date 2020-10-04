@@ -4,14 +4,13 @@
     Create a forum topic
 {% endblock%}
 {% block content %}
-<h1>Create a Forum Topic</h1>
-
-<form method="POST" action="{% url 'create_forum_route' lesson_id=lesson.id %}">
-    {% csrf_token %}
-    {{form|crispy}}
-    <input type="submit"/>
-</form>
-
-<a href="{% url 'show_forum_route' lesson_id=lesson.id %}" class="btn btn-primary">No</a>
-
+<div class="container mt-5 mb-5" id="all-lessons-container">
+    <h1>Create a Forum Topic</h1>
+    <form method="POST" action="{% url 'create_forum_route' lesson_id=lesson.id %}">
+        {% csrf_token %}
+        {{form|crispy}}
+        <input type="submit" class="btn create-btn"/>
+    </form>
+    <a href="{% url 'show_forum_route' lesson_id=lesson.id %}" class="btn create-btn">No</a>
+</div>
 {%endblock%}

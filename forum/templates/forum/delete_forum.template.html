@@ -3,10 +3,12 @@
     Delete: {{discussion.title}}
 {% endblock%}
 {%block content%}
-<h1>Are you sure you want to delete the discussion: "{{discussion.title}}"?</h1>
-<form method="POST" action="{% url 'delete_forum_route' lesson_id=lesson.id topic_id=discussion.id %}">
-    {% csrf_token %}
-    <a href="{% url 'show_forum_route' lesson_id=lesson.id %}" class="btn btn-primary">No</a>
-    <input type="submit" class="btn btn-warning" value="Yes">
-<form>
+<div class="container mt-5 mb-5" id="all-lessons-container">
+    <h1>Are you sure you want to delete the discussion:</h1><h3>  "{{discussion.title}}"?</h3>
+    <form method="POST" action="{% url 'delete_forum_route' lesson_id=lesson.id topic_id=discussion.id %}">
+        {% csrf_token %}
+        <a href="{% url 'show_forum_route' lesson_id=lesson.id %}" class="btn create-btn">No</a>
+        <input type="submit" class="btn delete-btn" value="Yes">
+    <form>
+</div>
 {%endblock%}

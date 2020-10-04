@@ -1,30 +1,31 @@
 {% extends 'base.template.html' %}
 {%load static %}
 {% load crispy_forms_tags %}
-{% block content %}
 {% block title %}
     Forum for: {{lesson.topic}}
 {% endblock%}
-<h1>Welcome to the Forum for {{lesson.topic}}</h1>
+{% block content %}
+<div class="container mt-5 mb-5" id="all-lessons-container">
+    <h1>Welcome to the Forum for:</h1><h3> {{lesson.topic}}</h3>
     <form method="GET">
     {{search_form|crispy}}
-    <input type="submit" value="Search"/>
+    <input type="submit" value="Search" class="account-btn w-100"/>
     </form>
-    <a href="{% url 'create_forum_route' lesson_id=lesson.id %}">Create a Discussion</a>
+    <button class="create-btn w-100">
+        <a href="{% url 'create_forum_route' lesson_id=lesson.id %}">Create a Discussion</a>
+    </button>
     <ul>
-      {% for discussion in discussions %}
+    {% for discussion in discussions %}
         <div>
             <li>
             <a href="{% url 'specific_topic_route' lesson_id=lesson.id topic_id=discussion.id %}">{{discussion.title}}</a>
                 {% if request.user == discussion.commenter %}
-                <a href="{% url 'update_forum_route' lesson_id=lesson.id topic_id=discussion.id %}" class="btn btn-primary">Edit</a>
-                <a href="{% url 'delete_forum_route' lesson_id=lesson.id topic_id=discussion.id %}" class="btn btn-warning">delete</a> 
+                <a href="{% url 'update_forum_route' lesson_id=lesson.id topic_id=discussion.id %}" class="btn create-btn">Edit</a>
+                <a href="{% url 'delete_forum_route' lesson_id=lesson.id topic_id=discussion.id %}" class="btn delete-btn">Delete</a> 
                 {%endif%}
             </li>
         </div>
-      {% endfor %}
-      
-            
+    {% endfor %}      
     </ul>
-
+</div>
 {%endblock%}
