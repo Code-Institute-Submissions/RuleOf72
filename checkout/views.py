@@ -4,11 +4,11 @@ from django.conf import settings
 from django.contrib.sites.models import Site
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
-import json
-import stripe
 from lessons.models import Lesson
 from checkout.models import Purchase
 from django.contrib.auth.decorators import login_required
+import json
+import stripe
 
 
 @login_required
