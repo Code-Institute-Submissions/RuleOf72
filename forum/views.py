@@ -1,4 +1,5 @@
-from django.shortcuts import render, HttpResponse, get_object_or_404, redirect, reverse
+from django.shortcuts import (render, HttpResponse, get_object_or_404,
+                              redirect, reverse)
 from lessons.forms import Lessons_form, Subtopics_form
 from lessons.models import Lesson, Sub_topic
 from .forms import Forum_form, Comment_form, SearchForm

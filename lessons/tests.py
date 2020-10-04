@@ -4,10 +4,9 @@ from django.contrib.auth.models import User
 from .models import Lesson
 import django.db.utils
 from django.urls import reverse
-# Create your tests here.
+
 
 class LessonViewTestCase(TestCase):
-    
 
     def test_can_get_create_lesson_form(self):
         response = self.client.get('/lessons/create/')
@@ -42,11 +41,14 @@ class LessonViewTestCase(TestCase):
         teacher2.save()
         lesson = Lesson(topic='CFD', price=999, teacher=teacher)
         lesson.save()
-        response = self.client.post(reverse('update_lesson_route', kwargs={'lesson_id': str(lesson.id)}), {
-            'topic': 'CFD2',
-            'price': 888,
-            'teacher': str(teacher2.id)
-        })
+        response = self.client.post(reverse('update_lesson_route',
+                                            kwargs={'lesson_id':
+                                                    str(lesson.id)}),
+                                    {
+                                        'topic': 'CFD2',
+                                        'price': 888,
+                                        'teacher': str(teacher2.id)
+                                    })
         self.assertEqual(response.status_code, 302)
         update_lesson = get_object_or_404(Lesson, pk=lesson.id)
         self.assertEquals(update_lesson.topic, "CFD2")
@@ -61,13 +63,15 @@ class LessonViewTestCase(TestCase):
         response = self.client.get(f'/lessons/delete/{lesson.id}/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'delete_lessons.template.html')
-    
+
     def test_can_delete_lesson(self):
         teacher = User.objects.create_user(username='ZZZ')
         teacher.save()
         lesson = Lesson(topic='CFD', price=999, teacher=teacher)
         lesson.save()
-        response = self.client.post(reverse('delete_lesson_route', kwargs={'lesson_id': str(lesson.id)}))
+        response = self.client.post(reverse('delete_lesson_route',
+                                            kwargs={'lesson_id':
+                                                    str(lesson.id)}))
         self.assertEqual(response.status_code, 302)
         lesson = Lesson.objects.filter(topic="CFD")
         self.assertEqual(lesson.count(), 0)
@@ -80,7 +84,7 @@ class LessonViewTestCase(TestCase):
         response = self.client.get(f'/lessons/lessons/{lesson.id}/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'specific_lessons.template.html')
-    
+
     def test_can_show_add_topic(self):
         teacher = User.objects.create_user(username='ZZZ')
         teacher.save()

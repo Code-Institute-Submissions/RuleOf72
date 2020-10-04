@@ -3,7 +3,6 @@ from datetime import datetime
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 
-# Create your models here.
 
 class Lesson(models.Model):
     date_created = models.DateTimeField(auto_now_add=True, blank=True)
@@ -16,6 +15,7 @@ class Lesson(models.Model):
     def __str__(self):
         return str(self.topic) + ' by: ' + str(self.teacher.username)
 
+
 class Sub_topic(models.Model):
     title = models.CharField(blank=False, max_length=255)
     video = models.CharField(blank=True, max_length=255)
@@ -24,4 +24,3 @@ class Sub_topic(models.Model):
 
     def __str__(self):
         return str(self.title)
-
