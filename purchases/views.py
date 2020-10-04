@@ -1,4 +1,5 @@
-from django.shortcuts import render, get_object_or_404, HttpResponse, reverse, redirect
+from django.shortcuts import (render, get_object_or_404, HttpResponse,
+                              reverse, redirect)
 from django.conf import settings
 from django.contrib.sites.models import Site
 from django.views.decorators.csrf import csrf_exempt
@@ -10,6 +11,7 @@ from lessons.models import Lesson
 from .models import Purchase
 from django.contrib.auth.decorators import login_required
 endpoint_secret = "whsec_usUfS52QhkWB8Ch8460YookJGDkg62Fx"
+
 
 @login_required
 def checkout(request, lesson_id):
@@ -59,12 +61,10 @@ def checkout_cancelled(request):
 @login_required
 @csrf_exempt
 def payment_completed(request):
-    # payload represents the data sent back to us by Stripe
     payload = request.body
     endpoint_secret = settings.STRIPE_ENDPOINT_SECRET
     sig_header = request.META["HTTP_STRIPE_SIGNATURE"]
     event = None
-
     try:
         event = stripe.Webhook.construct_event(
             payload, sig_header, endpoint_secret
@@ -76,7 +76,6 @@ def payment_completed(request):
     except stripe.error.SignatureVerificationError as e:
         print(e)
         return HttpResponse(status=400)
-
     if event['type'] == 'checkout.session.completed':
         session = event['data']['object']
         handle_payment(session)
@@ -89,7 +88,6 @@ def handle_payment(session):
     user = get_object_or_404(User, pk=session["client_reference_id"])
     metadata = json.loads(session['metadata']['data'])
     lesson = get_object_or_404(Lesson, pk=metadata['lesson_id'])
-
     purchase = Purchase()
     purchase.lesson_purchased = lesson
     purchase.student = user
