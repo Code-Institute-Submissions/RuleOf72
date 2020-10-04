@@ -38,7 +38,10 @@ def create_forum(request, lesson_id):
             forum.commenter = request.user
             forum.lesson_commented = lesson_being_viewed
             forum.save()
-            messages.success(request, f"New Forum Topic {form.cleaned_data['title']} has been created")
+            messages.success(request,
+                             f"""New Forum Topic
+                             {form.cleaned_data['title']}
+                             has been created""")
             return redirect(reverse('show_forum_route', kwargs={
                                         'lesson_id': lesson_id
                                     }))
@@ -128,7 +131,10 @@ def create_comment(request, lesson_id, topic_id):
             comment.commenter = request.user
             comment.topic_commented = topic_being_viewed
             comment.save()
-            messages.success(request, f"New comment {form.cleaned_data['title']} has been created")
+            messages.success(request,
+                             f"""New comment
+                             {form.cleaned_data['title']}
+                             has been created""")
             return redirect(reverse('specific_topic_route', kwargs={
                                         'lesson_id': lesson_id,
                                         'topic_id': topic_id
@@ -155,7 +161,8 @@ def update_comment(request, lesson_id, topic_id, comment_id):
     comment_being_viewed = get_object_or_404(Forum_comment, pk=comment_id)
     if request.user == comment_being_viewed.commenter:
         if request.method == "POST":
-            comment_form = Comment_form(request.POST, instance=comment_being_viewed)
+            comment_form = Comment_form(request.POST,
+                                        instance=comment_being_viewed)
             if comment_form.is_valid():
                 comment_form.save()
                 return redirect(reverse('specific_topic_route', kwargs={
@@ -207,5 +214,3 @@ def delete_comment(request, lesson_id, topic_id, comment_id):
                                             'lesson_id': lesson_id,
                                             'topic_id': topic_id
                                         }))
-
-

@@ -1,8 +1,7 @@
 from django.db import models
 from lessons.models import Lesson
 from django.contrib.auth.models import User
-from cloudinary.models import CloudinaryField
-# Create your models here.
+
 
 class Forum_topic(models.Model):
     title = models.CharField(blank=False, max_length=255)
@@ -13,6 +12,7 @@ class Forum_topic(models.Model):
 
     def __str__(self):
         return self.commenter.username + "'s thread"
+
 
 class Forum_comment(models.Model):
     title = models.CharField(blank=False, max_length=255)
