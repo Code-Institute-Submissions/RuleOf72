@@ -9,6 +9,9 @@ Please visit the live site [here](https://ruleof72zx.herokuapp.com/)
 ### For test users, please use the following account:
 - User: **customerb**
 - Password: **12345678!**
+or
+- User: **LZX**
+- Password: **seehorse1993!**
 ### Image
 ##### - This website uses Cloudinary for image uploading.
 ### Video
