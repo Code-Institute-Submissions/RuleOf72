@@ -46,16 +46,12 @@ def checkout(request, lesson_id):
 
 @login_required
 def checkout_success(request):
-    lesson = Purchase.objects.filter(student=request.user)
-    return render(request, "lessons/purchased_lessons.template.html", {
-        'lessons': lesson
-    })
+    return redirect(reverse("all_lesson_route"))
 
 
 @login_required
 def checkout_cancelled(request):
     return redirect(reverse("all_lesson_route"))
-
 
 @login_required
 @csrf_exempt
@@ -86,7 +82,6 @@ def payment_completed(request):
 def handle_payment(session):
     user = get_object_or_404(User, pk=session["client_reference_id"])
     metadata = json.loads(session['metadata']['data'])
-    print(metadata)
     lesson = get_object_or_404(Lesson, pk=metadata['lesson_id'])
     purchase = Purchase()
     purchase.lesson_purchased = lesson
